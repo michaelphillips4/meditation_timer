@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>meditation timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
+    <meta name="description" content="A Meditation Timer." />
+  </head>
+
+  <body>
+    <header>
+      <h1 class="center">Meditation Timer</h1>
+    </header>
+
+    <main>
+      <input
+        type="range"
+        step="1"
+        min="0"
+        value="10"
+        max="60"
+        id="stage"
+        onchange="rangeChange()"
+      />
+      <div>minutes <span id="minutes">10</span></div>
+      <button onclick="add()">Add</button>
+
+      <ol id="stagesList"></ol>
+      <div id="timer"></div>
+      <button onclick="start()">Start</button>
+    </main>
+
+    <script>
+      let stages = [];
+
+      const stagesList = document.getElementById("stagesList");
+      const stage = document.getElementById("stage");
+
+      const showStages = () => {
+        stagesList.innerHTML = "";
+        stages.map((e) => displayStage(e));
+      };
+
+      const displayStage = (stage) => {
+        const li = document.createElement("li");
+        li.innerText = stage;
+        stagesList.appendChild(li);
+      };
+
+      const addStage = () => {
+        console.log("addStage");
+        stages.push(parseInt(stage.value));
+      };
+
+      const add = () => {
+        addStage();
+        showStages();
+      };
+
+      const rangeChange = () => {
+        document.getElementById("minutes").innerText = stage.value;
+      };
+
+      const start = () => {
+        timer();
+       // stages.forEach((e) => timer(e));
+      };
+
+      const timer = () => {
+       // console.log(duration,stages);
+        let t = 0;
+
+         let duration = stages.reduce((x, y) => x + y,0);
+        let timer = setInterval(function () {
+          document.getElementById("timer").innerHTML = "00:" + t;
+          t++;
+          console.log(duration,t);
+          if (t >= duration) {
+            clearInterval(timer);
+            console.log(duration,"cleared");
+            document.getElementById("timer").innerHTML = "";
+          }
+        }, 1000);
+      };
+    </script>
+  </body>
+</html>
