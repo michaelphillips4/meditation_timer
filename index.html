@@ -14,6 +14,15 @@
     </header>
 
     <main>
+
+<p>
+      <audio controls id="meditation_chime">
+        <source src="section.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      
+</p>
+
       <input
         type="range"
         step="1"
@@ -33,7 +42,7 @@
 
     <script>
       let stages = [];
-
+      const chime = document.getElementById("meditation_chime");
       const stagesList = document.getElementById("stagesList");
       const stage = document.getElementById("stage");
 
@@ -64,25 +73,47 @@
 
       const start = () => {
         timer();
-       // stages.forEach((e) => timer(e));
+        // stages.forEach((e) => timer(e));
       };
 
       const timer = () => {
-       // console.log(duration,stages);
-        let t = 0;
+        // console.log(duration,stages);
 
-         let duration = stages.reduce((x, y) => x + y,0);
-        let timer = setInterval(function () {
-          document.getElementById("timer").innerHTML = "00:" + t;
-          t++;
-          console.log(duration,t);
-          if (t >= duration) {
-            clearInterval(timer);
-            console.log(duration,"cleared");
-            document.getElementById("timer").innerHTML = "";
+        let time = 0;
+       
+        const totalTime = stages.reduce((x, y) => x + y, 0);
+     
+
+        let timer = setInterval(() => {
+          
+          let sectionIndex = 0;
+             let sectionTime = stages[sectionIndex];
+          document.getElementById(
+            "timer"
+          ).innerHTML = `${sectionIndex} : ${time}`;
+         
+          console.log(sectionIndex, time);
+
+          if (sectionTime == time) {
+            sectionIndex++;
+            sectionTime += stage[sectionIndex];
+            //section ended 
+            chime.play();
           }
+          if (time >= totalTime) {
+           
+            console.log(time, "cleared");
+            document.getElementById("timer").innerHTML = "finished"; 
+            clearInterval(timer);
+            // finished 
+          }
+           time++;
         }, 1000);
       };
+
+    
+
+      
     </script>
   </body>
 </html>
