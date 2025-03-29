@@ -14,27 +14,23 @@
     </header>
 
     <main>
-
-<p>
-      <audio controls id="meditation_chime">
-        <source src="section.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      
-</p>
-
-      <input
+      <h3>test </h3>
+      <p>
+      select time<input
         type="range"
         step="1"
         min="0"
         value="10"
         max="60"
         id="stage"
-        onchange="rangeChange()"
+        oninput="rangeChange()"
       />
       <div>minutes <span id="minutes">10</span></div>
-      <button onclick="add()">Add</button>
-
+     </p> 
+     <hr /> 
+     
+     <button onclick="add()">Add</button>
+     
       <ol id="stagesList"></ol>
       <div id="timer"></div>
       <button onclick="start()">Start</button>
@@ -42,10 +38,10 @@
 
     <script>
       let stages = [];
-      const chime = document.getElementById("meditation_chime");
+     
       const stagesList = document.getElementById("stagesList");
       const stage = document.getElementById("stage");
-
+     
       const showStages = () => {
         stagesList.innerHTML = "";
         stages.map((e) => displayStage(e));
@@ -71,49 +67,57 @@
         document.getElementById("minutes").innerText = stage.value;
       };
 
-      const start = () => {
-        timer();
-        // stages.forEach((e) => timer(e));
-      };
+      const start = () =>  session();
+    
+      const chime = ()=> {
+        const c = new Audio( "section.mp3");
+        c.play();
+      }
 
-      const timer = () => {
-        // console.log(duration,stages);
-
+      const session = () => {
         let time = 0;
-       
+        console.log("timer start", stages, time);
+        let sectionIndex = 0;
+        let sectionTime = parseInt(stages[sectionIndex]);
+
         const totalTime = stages.reduce((x, y) => x + y, 0);
-     
 
-        let timer = setInterval(() => {
-          
-          let sectionIndex = 0;
-             let sectionTime = stages[sectionIndex];
-          document.getElementById(
-            "timer"
-          ).innerHTML = `${sectionIndex} : ${time}`;
-         
-          console.log(sectionIndex, time);
+        const timerElement = document.getElementById("timer");
 
-          if (sectionTime == time) {
+        let _session = setInterval(() => {
+          time++;
+          console.log(
+            " index ",
+            sectionIndex,
+            "interval time ",
+            time,
+
+            " section time",
+            sectionTime
+          );
+          timerElement.innerHTML = `section ${sectionIndex} : ${time}`;
+
+          // console.log(">", sectionTime, time, stages);
+
+          if (time === sectionTime) {
             sectionIndex++;
-            sectionTime += stage[sectionIndex];
-            //section ended 
-            chime.play();
+            sectionTime += parseInt(stages[sectionIndex]);
+
+            console.log("section change ");
+            //section ended
+            chime();
           }
           if (time >= totalTime) {
+            console.log("cleared");
+            document.getElementById("timer").innerHTML = "finished";
            
-            console.log(time, "cleared");
-            document.getElementById("timer").innerHTML = "finished"; 
-            clearInterval(timer);
-            // finished 
+            // finished
+          
+            chime(); 
+            clearInterval(_session);
           }
-           time++;
         }, 1000);
       };
-
-    
-
-      
     </script>
   </body>
 </html>
