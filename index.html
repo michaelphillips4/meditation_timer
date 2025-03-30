@@ -5,6 +5,10 @@
     <title>meditation timer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta name="description" content="A Meditation Timer." />
   </head>
 
@@ -14,110 +18,166 @@
     </header>
 
     <main>
-      <h3>test </h3>
       <p>
-      select time<input
-        type="range"
-        step="1"
-        min="0"
-        value="10"
-        max="60"
-        id="stage"
-        oninput="rangeChange()"
-      />
-      <div>minutes <span id="minutes">10</span></div>
-     </p> 
-     <hr /> 
-     
-     <button onclick="add()">Add</button>
-     
+        <button onclick="add()"><i class="fa fa-plus"></i> Add Section</button>
+      </p>
       <ol id="stagesList"></ol>
-      <div id="timer"></div>
-      <button onclick="start()">Start</button>
+
+      <h3 id="timer"></h3>
+      <div id="run-buttons" class="hide">
+        <button onclick="start()">
+          <i class="fa fa-check"></i> Start Meditation
+        </button>
+        <button onclick="stop()" id="stop-button" class="hide">
+          <i class="fa fa-close"></i> Stop Meditation
+        </button>
+      </div>
     </main>
 
+    <template id="time-section-template">
+      <div class="row">
+        <div class="col-8">
+          <input
+            class="time-range"
+            type="range"
+            step="1"
+            min="1"
+            value="10"
+            max="60"
+          />
+        </div>
+        <div class="col-3" style="font-size: 36px; padding-top: 18px">
+          <span class="section-time">10</span> minutes
+        </div>
+        <div class="col-1">
+          <i 
+            class="fa fa-trash section-remove right"
+            style="font-size: 36px; padding-top: 10px"
+          ></i>
+        </div>
+      </div>
+    </template>
+
     <script>
-      let stages = [];
-     
       const stagesList = document.getElementById("stagesList");
-      const stage = document.getElementById("stage");
-     
-      const showStages = () => {
-        stagesList.innerHTML = "";
-        stages.map((e) => displayStage(e));
-      };
-
-      const displayStage = (stage) => {
-        const li = document.createElement("li");
-        li.innerText = stage;
-        stagesList.appendChild(li);
-      };
-
-      const addStage = () => {
-        console.log("addStage");
-        stages.push(parseInt(stage.value));
-      };
+      const timerElement = document.getElementById("timer");
+      let _timer;
 
       const add = () => {
-        addStage();
-        showStages();
+        const li = document.createElement("li");
+        li.appendChild(document.createElement("time-section"));
+        stagesList.appendChild(li);
+        document.getElementById("run-buttons").classList.remove("hide");
       };
 
-      const rangeChange = () => {
-        document.getElementById("minutes").innerText = stage.value;
+      const start = () => {
+        document.getElementById("stop-button").classList.remove("hide");
+        startSession();
       };
 
-      const start = () =>  session();
-    
-      const chime = ()=> {
-        const c = new Audio( "section.mp3");
+      const stop = () => {
+        console.log("stop clicked");
+        clearInterval(this._timer);
+        displayTimer("");
+      };
+
+      const chime = () => {
+        const c = new Audio("section.mp3");
         c.play();
+      };
+
+      const displayTimer = (value) => (timerElement.innerHTML = value);
+
+      const timeStateMessage = (time,sectionIndex,stages)=>
+      {
+        const m =  Math.floor(time / 60);
+        const s = time % 60;
+
+         return `Section ${sectionIndex + 1} - 
+             Duration ${stages[sectionIndex]} min - 
+             Time ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        
+
       }
 
-      const session = () => {
+
+
+      const startSession = () => {
+        const stages = [...document.querySelectorAll(".time-range")].map((e) =>
+          parseInt(e.value)
+        );
+        const totalTime = stages.reduce((x, y) => x + y, 0) ;
+
         let time = 0;
-        console.log("timer start", stages, time);
         let sectionIndex = 0;
         let sectionTime = parseInt(stages[sectionIndex]);
 
-        const totalTime = stages.reduce((x, y) => x + y, 0);
-
-        const timerElement = document.getElementById("timer");
-
-        let _session = setInterval(() => {
+        this._timer = setInterval(() => {
           time++;
-          console.log(
-            " index ",
-            sectionIndex,
-            "interval time ",
-            time,
-
-            " section time",
-            sectionTime
-          );
-          timerElement.innerHTML = `section ${sectionIndex} : ${time}`;
-
-          // console.log(">", sectionTime, time, stages);
-
-          if (time === sectionTime) {
+         
+          displayTimer(timeStateMessage(time,sectionIndex,stages));
+             
+          if (time === (sectionTime * 60)) {
             sectionIndex++;
             sectionTime += parseInt(stages[sectionIndex]);
-
-            console.log("section change ");
             //section ended
             chime();
           }
-          if (time >= totalTime) {
-            console.log("cleared");
-            document.getElementById("timer").innerHTML = "finished";
-           
+          if (time >= (totalTime * 60)) {
+            displayTimer("finished - go well");
             // finished
-          
-            chime(); 
-            clearInterval(_session);
+            chime();
+            clearInterval(this._timer);
           }
+
         }, 1000);
       };
     </script>
+
+    <script>
+      class TimeSectionComponent extends HTMLElement {
+        connectedCallback() {
+          const template = document.getElementById("time-section-template");
+          const clone = template.content.cloneNode(true);
+
+          const timeElement = clone.querySelector(".section-time");
+          const rangeElement = clone.querySelector(".time-range");
+          const removeButton = clone.querySelector(".section-remove");
+          console.log(rangeElement);
+          rangeElement.addEventListener(
+            "input",
+            () => (timeElement.innerText = event.target.value)
+          );
+          removeButton.addEventListener("click", () => {
+            event.target.parentElement.closest("li").remove();
+            //console.log(li);
+          });
+
+          this.innerHTML = "";
+          this.appendChild(clone);
+        }
+      }
+
+      customElements.define("time-section", TimeSectionComponent);
+    </script>
+
+    <style>
+      li {
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 20px;
+      }
+
+      ol {
+        list-style-type: none; 
+        padding: 0; 
+        margin: 0; 
+      }
+
+      .fa-trash:hover {
+        cursor: pointer;     
+      } 
+    </style>
   </body>
 </html>
