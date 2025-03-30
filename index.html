@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <title>meditation timer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
-    <link
+     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+    <script src="timeSectionComponent.js" defer></script>
     <meta name="description" content="A Meditation Timer." />
   </head>
 
@@ -23,7 +26,7 @@
       </p>
       <ol id="stagesList"></ol>
 
-      <h3 id="timer"></h3>
+      
       <div id="run-buttons" class="hide">
         <button onclick="start()">
           <i class="fa fa-check"></i> Start Meditation
@@ -32,6 +35,7 @@
           <i class="fa fa-close"></i> Stop Meditation
         </button>
       </div>
+      <h3 id="timer"></h3>
     </main>
 
     <template id="time-section-template">
@@ -58,126 +62,6 @@
       </div>
     </template>
 
-    <script>
-      const stagesList = document.getElementById("stagesList");
-      const timerElement = document.getElementById("timer");
-      let _timer;
 
-      const add = () => {
-        const li = document.createElement("li");
-        li.appendChild(document.createElement("time-section"));
-        stagesList.appendChild(li);
-        document.getElementById("run-buttons").classList.remove("hide");
-      };
-
-      const start = () => {
-        document.getElementById("stop-button").classList.remove("hide");
-        startSession();
-      };
-
-      const stop = () => {
-        console.log("stop clicked");
-        clearInterval(this._timer);
-        displayTimer("");
-      };
-
-      const chime = () => {
-        const c = new Audio("section.mp3");
-        c.play();
-      };
-
-      const displayTimer = (value) => (timerElement.innerHTML = value);
-
-      const timeStateMessage = (time,sectionIndex,stages)=>
-      {
-        const m =  Math.floor(time / 60);
-        const s = time % 60;
-
-         return `Section ${sectionIndex + 1} - 
-             Duration ${stages[sectionIndex]} min - 
-             Time ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        
-
-      }
-
-
-
-      const startSession = () => {
-        const stages = [...document.querySelectorAll(".time-range")].map((e) =>
-          parseInt(e.value)
-        );
-        const totalTime = stages.reduce((x, y) => x + y, 0) ;
-
-        let time = 0;
-        let sectionIndex = 0;
-        let sectionTime = parseInt(stages[sectionIndex]);
-
-        this._timer = setInterval(() => {
-          time++;
-         
-          displayTimer(timeStateMessage(time,sectionIndex,stages));
-             
-          if (time === (sectionTime * 60)) {
-            sectionIndex++;
-            sectionTime += parseInt(stages[sectionIndex]);
-            //section ended
-            chime();
-          }
-          if (time >= (totalTime * 60)) {
-            displayTimer("finished - go well");
-            // finished
-            chime();
-            clearInterval(this._timer);
-          }
-
-        }, 1000);
-      };
-    </script>
-
-    <script>
-      class TimeSectionComponent extends HTMLElement {
-        connectedCallback() {
-          const template = document.getElementById("time-section-template");
-          const clone = template.content.cloneNode(true);
-
-          const timeElement = clone.querySelector(".section-time");
-          const rangeElement = clone.querySelector(".time-range");
-          const removeButton = clone.querySelector(".section-remove");
-          console.log(rangeElement);
-          rangeElement.addEventListener(
-            "input",
-            () => (timeElement.innerText = event.target.value)
-          );
-          removeButton.addEventListener("click", () => {
-            event.target.parentElement.closest("li").remove();
-            //console.log(li);
-          });
-
-          this.innerHTML = "";
-          this.appendChild(clone);
-        }
-      }
-
-      customElements.define("time-section", TimeSectionComponent);
-    </script>
-
-    <style>
-      li {
-        border: 1px solid black;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 20px;
-      }
-
-      ol {
-        list-style-type: none; 
-        padding: 0; 
-        margin: 0; 
-      }
-
-      .fa-trash:hover {
-        cursor: pointer;     
-      } 
-    </style>
   </body>
 </html>
