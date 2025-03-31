@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>meditation timer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <link
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
@@ -21,21 +21,41 @@
     </header>
 
     <main>
-      <p>
-        <button onclick="add()"><i class="fa fa-plus"></i> Add Section</button>
-      </p>
-      <ol id="stagesList"></ol>
-
-      
-      <div id="run-buttons" class="hide">
-        <button onclick="start()">
-          <i class="fa fa-check"></i> Start Meditation
-        </button>
-        <button onclick="stop()" id="stop-button" class="hide">
-          <i class="fa fa-close"></i> Stop Meditation
-        </button>
+      <div id="savedMeditations" class="hide">
+        <h3>Saved Meditations</h3>
+        <ul id="saved"></ul>
+        <hr />
+        <button onclick="showMeditation()">Create New Meditation</button>
       </div>
-      <h3 id="timer"></h3>
+
+      <div id="meditation" class="hide">
+        <input type="text" id="name" placeholder="name" />
+        <p>
+          <button onclick="add()">
+            <i class="fa fa-plus"></i> Add Section
+          </button>
+        </p>
+        <ol id="stagesList"></ol>
+
+        <div id="run-buttons" class="hide">
+          <button onclick="start()">
+            <i class="fa fa-check"></i> Start Meditation
+          </button>
+          <button onclick="stop()" id="stop-button" class="hide">
+            <i class="fa fa-close"></i> Stop Meditation
+          </button>
+
+          <h3 id="timer"></h3>
+          <button onclick="save()">Save</button>
+        </div>
+      </div>
+
+      <hr />
+
+      <audio controls>
+        <source src="section.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
     </main>
 
     <template id="time-section-template">
@@ -54,14 +74,12 @@
           <span class="section-time">10</span> minutes
         </div>
         <div class="col-1">
-          <i 
+          <i
             class="fa fa-trash section-remove right"
             style="font-size: 36px; padding-top: 10px"
           ></i>
         </div>
       </div>
     </template>
-
-
   </body>
 </html>
