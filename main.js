@@ -95,9 +95,11 @@ const getSavedItems = () => {
   let out = "";
   let i = 0;
   for (const item of data) {
-    out += `<li> <a href="#" onclick=load(${i})>Load</a> Name : ${item.name} ${item.stages} 
-            <i class="fa fa-trash section-remove right" onclick=remove(${i})></i>
-            </li>`;
+    out += `<li class="saved-item"> 
+           <a href="#" onclick=load(${i})>Load</a> 
+           Name : ${item.name} ${item.stages} 
+           <i class="fa fa-trash section-remove right" onclick=remove(${i})></i> 
+           </li>`;
     i++;
   }
   document.getElementById("saved").innerHTML = out;
@@ -145,4 +147,5 @@ const remove = (i) => {
 const createMeditation =() =>{
   nameElement.value = "";
   showMeditation();
+  addSection(10);
 }

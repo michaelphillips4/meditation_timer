@@ -1,11 +1,18 @@
 li.section {
-  background-color: black;
-  color: white;
+  background-color: var(--bg-highlight);
+  color:inherit ;
   border-radius: 0.25rem 1rem 1rem 1rem;
   padding: 10px;
+  margin: 10px;
 }
 
-
+.saved-item{
+  background-color: var(--bg-highlight);
+  color:inherit ;
+  border-radius: 1rem;
+  padding: 10px;
+  margin: 10px;
+}
 
 ol {
   list-style-type: none;
@@ -18,7 +25,6 @@ ol {
 }
 
 button {
-  min-width: 300px;
   margin: 10px;
 }
 
@@ -30,6 +36,10 @@ input {
   margin: 10px;
 }
 
+label {
+  padding-left: 10px;
+}
+
 header {
   padding-top: 1px;
   padding-bottom: 1px;
@@ -37,11 +47,15 @@ header {
   color: white;
 }
 
-.fa-trash{
+fieldset {
+  border-radius: 1rem;
+}
+
+.fa-trash {
   font-size: larger;
 }
 
-time-section > div{
-  padding:10px;
+time-section > div {
+  padding: 10px;
   padding-top: 0px;
 }

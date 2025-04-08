@@ -7,7 +7,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-     
     />
     <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
     <link rel="stylesheet" href="style.css" />
@@ -18,29 +17,31 @@
 
   <body>
     <header>
-      <h1 class="center"> Meditation Timer</h1>
+      <h1 class="center">Meditation Timer</h1>
     </header>
-   
+
     <main>
       <div id="savedMeditations" class="hide">
-        <h3>Saved Meditations</h3>
-        <ul id="saved"></ul>
-        <hr />
+        <fieldset>
+          <legend>Saved Meditations</legend>
+          <ol id="saved"></ol>
+        </fieldset>
         <button onclick="createMeditation()">Create New Meditation</button>
       </div>
 
       <div id="meditation" class="hide">
-        <input type="text" id="name" placeholder="Name of the Meditation (optional)" list="meditations-datalist"/>
-        <datalist id="meditations-datalist">
-          <option value="Mindfulness of Breathing">
-          <option value="Metta Bhavana">
-        </datalist>
+
+        <fieldset>
+          <legend>Meditation</legend>
+
+       
+       <ol id="stagesList"></ol>
         <p>
-          <button onclick="add()">
-            <i class="fa fa-plus"></i> Add Section to Meditation
+          <button onclick="add()" >
+            <i class="fa fa-plus"></i> Add Section 
           </button>
         </p>
-        <ol id="stagesList"></ol>
+       
 
         <div id="run-buttons" class="hide">
           <button onclick="start()">
@@ -50,41 +51,59 @@
             <i class="fa fa-close"></i> Stop Meditation
           </button>
 
-          <h3 id="timer"></h3>
-          <button onclick="save()">Save</button>
+          <p id="timer"></p>
+
+          <fieldset>
+            <legend>Save Meditation</legend>
+
+            <label for="name">Name </label>
+
+            <input
+              type="text"
+              id="name"
+              placeholder=""
+              list="meditations-datalist"
+            />
+            <datalist id="meditations-datalist">
+              <option value="Mindfulness of Breathing"></option>
+              <option value="Metta Bhavana"></option>
+            </datalist>
+            <button onclick="save()">Save</button>
+          </fieldset>
+          </div>
+          </div>
         </div>
       </div>
-
-      <hr />
       <p>
-        sample of sound and volume played at the end of each section.
-      </p>
-      
-      <audio controls>
-        <source src="section.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-</main>
-      <footer class="center">v1 by Michael Phillips <a href="http:\\www.area2.co.uk">Home</a></footer>
+        <details>
+          <summary>Settings</summary>
+          <p>sample of sound and volume played at the end of each section.</p>
 
-    
+          <audio controls>
+            <source src="section.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </details>
+      </p>
+    </main>
+    <footer class="center">
+      v1 by Michael Phillips <a href="http:\\www.area2.co.uk">Home</a>
+    </footer>
 
     <template id="time-section-template">
-         <input
-            class="time-range"
-            type="range"
-            step="1"
-            min="1"
-            value="10"
-            max="60"
-          />
-        
-        <div>
-          <span class="section-time">10</span> minutes
-          <i
-            class="fa fa-trash section-remove right"
-           ></i>
-        </div>
-        </template>
+      <input
+        class="time-range"
+        type="range"
+        step="1"
+        min="1"
+        value="10"
+        max="60"
+      />
+
+      <div>
+        <span class="section-time">10</span> minutes
+        <i class="fa fa-trash section-remove right"></i>
+      </div>
+    </template>
   </body>
 </html>
