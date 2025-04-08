@@ -7,6 +7,7 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+     
     />
     <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
     <link rel="stylesheet" href="style.css" />
@@ -17,22 +18,26 @@
 
   <body>
     <header>
-      <h1 class="center">Meditation Timer</h1>
+      <h1 class="center"> Meditation Timer</h1>
     </header>
-
+   
     <main>
       <div id="savedMeditations" class="hide">
         <h3>Saved Meditations</h3>
         <ul id="saved"></ul>
         <hr />
-        <button onclick="showMeditation()">Create New Meditation</button>
+        <button onclick="createMeditation()">Create New Meditation</button>
       </div>
 
       <div id="meditation" class="hide">
-        <input type="text" id="name" placeholder="name" />
+        <input type="text" id="name" placeholder="Name of the Meditation (optional)" list="meditations-datalist"/>
+        <datalist id="meditations-datalist">
+          <option value="Mindfulness of Breathing">
+          <option value="Metta Bhavana">
+        </datalist>
         <p>
           <button onclick="add()">
-            <i class="fa fa-plus"></i> Add Section
+            <i class="fa fa-plus"></i> Add Section to Meditation
           </button>
         </p>
         <ol id="stagesList"></ol>
@@ -51,17 +56,21 @@
       </div>
 
       <hr />
-
+      <p>
+        sample of sound and volume played at the end of each section.
+      </p>
+      
       <audio controls>
         <source src="section.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
-    </main>
+</main>
+      <footer class="center">v1 by Michael Phillips <a href="http:\\www.area2.co.uk">Home</a></footer>
+
+    
 
     <template id="time-section-template">
-      <div class="row">
-        <div class="col-8">
-          <input
+         <input
             class="time-range"
             type="range"
             step="1"
@@ -69,17 +78,13 @@
             value="10"
             max="60"
           />
-        </div>
-        <div class="col-3" style="font-size: 36px; padding-top: 18px">
+        
+        <div>
           <span class="section-time">10</span> minutes
-        </div>
-        <div class="col-1">
           <i
             class="fa fa-trash section-remove right"
-            style="font-size: 36px; padding-top: 10px"
-          ></i>
+           ></i>
         </div>
-      </div>
-    </template>
+        </template>
   </body>
 </html>

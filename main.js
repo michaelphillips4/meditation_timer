@@ -3,6 +3,9 @@ const stagesList = document.getElementById("stagesList");
 
 const timerElement = document.getElementById("timer");
 
+const nameElement =  document.getElementById("name");
+
+
 const _chime = new Audio("section.mp3");
 
 const storageKey = "SeriesTimerKey";
@@ -28,9 +31,8 @@ const chime = () => _chime.play();
 const displayTimer = (value) => (timerElement.innerHTML = value);
 
 const timeStateMessage = (time, sectionIndex, stages) =>
-  `Section ${sectionIndex + 1} - 
-       Duration ${stages[sectionIndex]} min - 
-       Time ${(Math.floor(time / 60)).toString().padStart(2, '0')}:
+  `Current Section : ${sectionIndex + 1} (${stages[sectionIndex]} min) - 
+  Total Time : ${(Math.floor(time / 60)).toString().padStart(2, '0')}:
             ${(time % 60).toString().padStart(2, '0')}`;
 
 const getStages = () => [...document.querySelectorAll(".time-range")].map((e) =>
@@ -68,7 +70,7 @@ const startSession = () => {
 
 const save = () => {
   const itemData = {};
-  itemData.name = document.getElementById("name").value;
+  itemData.name = nameElement.value;
   itemData.stages = getStages();
   const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
   data.push(itemData);
@@ -95,7 +97,6 @@ const getSavedItems = () => {
   for (const item of data) {
     out += `<li> <a href="#" onclick=load(${i})>Load</a> Name : ${item.name} ${item.stages} 
             <i class="fa fa-trash section-remove right" onclick=remove(${i})></i>
-            <hr />
             </li>`;
     i++;
   }
@@ -116,7 +117,7 @@ const load = (i) => {
   stagesList.innerHTML = "";
   const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
   const item = data[i];
-  document.getElementById("name").value = item.name;
+  nameElement.value = item.name;
   for (const duration of item.stages) {
     addSection(duration);
   }
@@ -139,4 +140,9 @@ const remove = (i) => {
   data.splice(i, 1);
   localStorage.setItem(storageKey, JSON.stringify(data));
   getSavedItems()
+}
+
+const createMeditation =() =>{
+  nameElement.value = "";
+  showMeditation();
 }

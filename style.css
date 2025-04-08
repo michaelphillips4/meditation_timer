@@ -1,31 +1,47 @@
 li.section {
-    border: 1px solid black;
-    border-color: light-dark(black,silver);
-  
-    border-radius: 0.25rem 1rem 1rem 1rem;
-  }
+  background-color: black;
+  color: white;
+  border-radius: 0.25rem 1rem 1rem 1rem;
+  padding: 10px;
+}
 
 
-li{ padding: 10px;
-    margin: 10px;}
 
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  ol {
-    list-style-type: none; 
-    padding: 0; 
-    margin: 0; 
-  }
+.fa-trash:hover {
+  cursor: pointer;
+}
 
-  .fa-trash:hover {
-    cursor: pointer;     
-  } 
+button {
+  min-width: 300px;
+  margin: 10px;
+}
 
-  button{
-    font-size:xx-large;
-    min-width: 300px;
-    margin: 10px;
-  }
+h3 {
+  margin: 10px;
+}
 
-  h3{ margin: 10px;}
+input {
+  margin: 10px;
+}
 
-  input {font-size: xx-large;margin: 10px;}
+header {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: black;
+  color: white;
+}
+
+.fa-trash{
+  font-size: larger;
+}
+
+time-section > div{
+  padding:10px;
+  padding-top: 0px;
+}
