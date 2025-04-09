@@ -18,9 +18,13 @@
 
   <body>
     <header>
-      <h1 class="center">Meditation Timer</h1>
+      <h1 class="center">
+        <img width="48" height="48" src="https://img.icons8.com/color/48/lotus.png" alt="lotus"/>
+        Meditation
+        <img width="48" height="48" src="https://img.icons8.com/color/48/lotus.png" alt="lotus"/>
+      <br />Timer
+      </h1>
     </header>
-
     <main>
       <div id="savedMeditations" class="hide">
         <fieldset>
@@ -46,7 +50,9 @@
 
         <div id="run-buttons" class="hide">
           <button onclick="start()">
-            <i class="fa fa-check"></i> Start Meditation
+            <img width="48" height="48" src="https://img.icons8.com/deco-color/48/meditation-guru.png" alt="meditation-guru"/>
+            <br />
+            Start Meditation
           </button>
           <button onclick="stop()" id="stop-button" class="hide">
             <i class="fa fa-close"></i> Stop Meditation
@@ -69,7 +75,7 @@
               <option value="Mindfulness of Breathing"></option>
               <option value="Metta Bhavana"></option>
             </datalist>
-            <button onclick="save()">Save</button>
+            <button onclick="save()" > <i class="fa fa-save"></i> Save</button>
           </fieldset>
           </div>
           </div>

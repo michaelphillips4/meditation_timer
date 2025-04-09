@@ -4,6 +4,7 @@ li.section {
   border-radius: 0.25rem 1rem 1rem 1rem;
   padding: 10px;
   margin: 10px;
+  border : 1px silver solid;
 }
 
 .saved-item{
@@ -24,16 +25,15 @@ ol {
   cursor: pointer;
 }
 
-button {
-  margin: 10px;
-}
 
-h3 {
+h3,p,button {
   margin: 10px;
 }
 
 input {
   margin: 10px;
+  width: 85%;
+  border: 1px solid silver;
 }
 
 label {
