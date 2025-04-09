@@ -10,8 +10,9 @@
     />
     <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <script src="main.js" defer></script>
+   
     <script src="timeSectionComponent.js" defer></script>
+     <script src="main.js" defer></script>
     <meta name="description" content="A Meditation Timer." />
   </head>
 
@@ -91,6 +92,11 @@
     </footer>
 
     <template id="time-section-template">
+      <div>
+        <span class="section-time">10</span> minutes
+        <i class="fa fa-trash section-remove right"></i>
+      </div> 
+      
       <input
         class="time-range"
         type="range"
@@ -100,10 +106,7 @@
         max="60"
       />
 
-      <div>
-        <span class="section-time">10</span> minutes
-        <i class="fa fa-trash section-remove right"></i>
-      </div>
+    
     </template>
   </body>
 </html>

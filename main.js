@@ -31,9 +31,9 @@ const chime = () => _chime.play();
 const displayTimer = (value) => (timerElement.innerHTML = value);
 
 const timeStateMessage = (time, sectionIndex, stages) =>
-  `Current Section : ${sectionIndex + 1} (${stages[sectionIndex]} min) - 
-  Total Time : ${(Math.floor(time / 60)).toString().padStart(2, '0')}:
-            ${(time % 60).toString().padStart(2, '0')}`;
+  `<p>Current Section : ${sectionIndex + 1} (${stages[sectionIndex]} min)</p> 
+   <p>Total Time : ${(Math.floor(time / 60)).toString().padStart(2, '0')}:
+            ${(time % 60).toString().padStart(2, '0')}</p>`;
 
 const getStages = () => [...document.querySelectorAll(".time-range")].map((e) =>
   parseInt(e.value)
@@ -72,10 +72,10 @@ const save = () => {
   const itemData = {};
   itemData.name = nameElement.value;
   itemData.stages = getStages();
-  const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
+  const data = getSavedItems();
   data.push(itemData);
   localStorage.setItem(storageKey, JSON.stringify(data));
-  getSavedItems();
+  loadPage();
 }
 
 const showMeditation = () => {
@@ -90,35 +90,12 @@ const showMeditationControls = () => {
   document.getElementById("run-button").classList.remove("hide");
 }
 
-const getSavedItems = () => {
-  const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
-  let out = "";
-  let i = 0;
-  for (const item of data) {
-    out += `<li class="saved-item"> 
-           <a href="#" onclick=load(${i})>Load</a> 
-           Name : ${item.name} ${item.stages} 
-           <i class="fa fa-trash section-remove right" onclick=remove(${i})></i> 
-           </li>`;
-    i++;
-  }
-  document.getElementById("saved").innerHTML = out;
-  if (out.length === 0) {
-    showMeditation();
-    document.getElementById("savedMeditations").classList.add("hide");
-  }
-  else {
-    showSavedMeditations();
-    document.getElementById("meditation").classList.add("hide");
-  }
-}
-
-getSavedItems();
+const getSavedItems=()=> JSON.parse(localStorage.getItem(storageKey)) ?? [];
 
 const load = (i) => {
   stagesList.innerHTML = "";
-  const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
-  const item = data[i];
+  const items = getSavedItems();
+  const item = items[i];
   nameElement.value = item.name;
   for (const duration of item.stages) {
     addSection(duration);
@@ -141,11 +118,46 @@ const remove = (i) => {
   const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
   data.splice(i, 1);
   localStorage.setItem(storageKey, JSON.stringify(data));
-  getSavedItems()
+  loadPage();
 }
 
 const createMeditation =() =>{
   nameElement.value = "";
+  stagesList.innerHTML = "";
   showMeditation();
   addSection(10);
 }
+
+
+
+const listSavedItems = (items) =>{
+  let out = "";
+  let i = 0;
+  for (const item of items) {
+    out += `<li class="saved-item"> 
+           <a href="#" onclick=load(${i})>Load</a> 
+           Name : ${item.name} (${item.stages.join("mins,")}mins).
+           <i class="fa fa-trash section-remove right" onclick=remove(${i})></i> 
+           </li>`;
+    i++;
+  }
+  document.getElementById("saved").innerHTML = out;
+}
+
+const loadPage = () => {
+  const items = getSavedItems();
+  listSavedItems(items);
+  if (items.length === 0) {
+    createMeditation();
+    showMeditation();
+    document.getElementById("savedMeditations").classList.add("hide");
+  }
+  else {
+    showSavedMeditations();
+    document.getElementById("meditation").classList.add("hide");
+  }
+}
+
+
+
+loadPage();

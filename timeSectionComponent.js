@@ -9,9 +9,9 @@ class TimeSectionComponent extends HTMLElement {
        
         rangeElement.addEventListener(
             "input",
-            () => (timeElement.innerText = event.target.value)
+            (event) => (timeElement.innerText = event.target.value)
         );
-        removeButton.addEventListener("click", () => {
+        removeButton.addEventListener("click", (event) => {
             event.target.parentElement.closest("li").remove();
         });
 
