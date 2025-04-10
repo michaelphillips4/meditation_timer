@@ -1,20 +1,20 @@
-
 li.section {
   background-color: var(--bg-highlight);
-  color:inherit ;
+  color: inherit;
   border-radius: 0.25rem 1rem 1rem 1rem;
   padding: 10px;
   margin: 10px;
-  border : 1px silver solid;
+  border: 1px silver solid;
 }
 
-.saved-item{
+.saved-item {
   background-color: var(--bg-highlight);
-  color:inherit ;
+  color: inherit;
   border-radius: 1rem;
   padding: 10px;
   margin: 10px;
-  max-width: 80vw;
+  max-width: 60vw;
+  word-wrap: break-word;
 }
 
 ol {
@@ -27,8 +27,9 @@ ol {
   cursor: pointer;
 }
 
-
-h3,p,button {
+h3,
+p,
+button {
   margin: 10px;
 }
 
@@ -64,16 +65,16 @@ time-section > div {
 
 @media (max-width: 850px) {
   #button-start {
-       width: 100%;
+    width: 100%;
   }
 
-  button
-  { 
-     display: block; margin: 0 auto;}
+  button {
+    display: block;
+    margin: 0 auto;
+  }
 
-#button-create{
-  margin-top: 10px;
+  #button-create,
+  #button-stop {
+    margin-top: 10px;
+  }
 }
-
-
-  }

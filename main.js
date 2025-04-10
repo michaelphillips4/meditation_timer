@@ -17,7 +17,7 @@ const add = () => addSection(10);
 const start = () => {
   _chime.play();
   _chime.pause();
-  document.getElementById("stop-button").classList.remove("hide");
+  document.getElementById("button-stop").classList.remove("hide");
   startSession();
 };
 
