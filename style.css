@@ -1,3 +1,14 @@
+
+main{
+
+  background-image: url("lotus.jpeg");
+  
+  background-position: center;
+  background-repeat:no-repeat ;
+  background-size:cover ;
+}
+
+
 li.section {
   background-color: var(--bg-highlight);
   color: inherit;
@@ -15,6 +26,16 @@ li.section {
   margin: 10px;
   max-width: 60vw;
   word-wrap: break-word;
+}
+
+legend ,label ,p, details{
+  background-color:light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
+  color:light-dark(#100c08, rgb(230, 230, 230));;
+  border-radius: 1rem;
+}
+
+details{
+  padding:10px ;
 }
 
 ol {
@@ -76,5 +97,19 @@ time-section > div {
   #button-create,
   #button-stop {
     margin-top: 10px;
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  main {
+    background-blend-mode: luminosity;
+  }
+}
+
+
+@media (prefers-color-scheme: light) {
+ main {
+    background-blend-mode:normal ;
   }
 }

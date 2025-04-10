@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <title>meditation timer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -12,58 +16,58 @@
     <link rel="stylesheet" href="style.css" />
    
     <script src="timeSectionComponent.js" defer></script>
-     <script src="main.js" defer></script>
+    <script src="main.js" defer></script>
     <meta name="description" content="A Meditation Timer." />
   </head>
 
   <body>
     <header>
       <h1 class="center">
-        <img width="48" height="48" src="https://img.icons8.com/color/48/lotus.png" alt="lotus"/>
+        <img width="48" height="48" src="lotus.png" alt="lotus"/>
         Meditation
-        <img width="48" height="48" src="https://img.icons8.com/color/48/lotus.png" alt="lotus"/>
+        <img width="48" height="48" src="lotus.png" alt="lotus"/>
       <br />Timer
       </h1>
     </header>
     <main>
       <div id="savedMeditations" class="hide">
         <fieldset>
-          <legend>Saved Meditations</legend>
-          <ol id="saved"></ol>
+          <legend>&emsp;Saved Meditations&emsp;</legend>
+          <ol id="savedList"></ol>
         </fieldset>
-        <button onclick="createMeditation()" id="button-create">Create New Meditation</button>
+        <button id="button-create">Create New Meditation</button>
       </div>
 
       <div id="meditation" class="hide">
 
         <fieldset>
-          <legend>Meditation</legend>
-
-       
+          <legend>&emsp;Meditation&emsp;</legend>
+      
        <ol id="stagesList"></ol>
-        <p>
-          <button onclick="add()" >
+        
+          <button id="addSectionButton">
             <i class="fa fa-plus"></i> Add Section 
           </button>
-        </p>
+    
+          <br />
        
 
         <div id="run-buttons" class="hide">
-          <button onclick="start()" id="button-start">
+          <button id="button-start">
             <img width="48" height="48" src="https://img.icons8.com/deco-color/48/meditation-guru.png" alt="meditation-guru"/>
             <br />
             Start Meditation
           </button>
-          <button onclick="stop()" id="button-stop" class="hide">
+          <button id="button-stop" class="hide">
             <i class="fa fa-close"></i> Stop Meditation
           </button>
 
           <p id="timer"></p>
 
           <fieldset>
-            <legend>Save Meditation</legend>
+            <legend>&emsp;Save Meditation&emsp;</legend>
 
-            <label for="name">Name </label>
+            <label for="name"> Name&ensp;</label>
 
             <input
               type="text"
@@ -75,7 +79,7 @@
               <option value="Mindfulness of Breathing"></option>
               <option value="Metta Bhavana"></option>
             </datalist>
-            <button onclick="save()" > <i class="fa fa-save"></i> Save</button>
+            <button id="button-save"> <i class="fa fa-save"></i> Save</button>
           </fieldset>
           </div>
           </div>

@@ -1,23 +1,25 @@
 
-const stagesList = document.getElementById("stagesList");
-
+const stagesListElement = document.getElementById("stagesList");
 const timerElement = document.getElementById("timer");
-
 const nameElement =  document.getElementById("name");
-
-
-const _chime = new Audio("section.mp3");
+const stopButtonElement = document.getElementById("button-stop");
+const startButtonElement = document.getElementById("button-start");
+const saveButtonElement = document.getElementById("button-save");
+const meditationElement = document.getElementById("meditation");
+const runButtonsElement = document.getElementById("run-buttons");
+const savedMeditationsElement = document.getElementById("savedMeditations");
+const savedListElement = document.getElementById("savedList");
+const addSectionButton = document.getElementById("addSectionButton");
+const createButtonElement = document.getElementById("button-create");
 
 const storageKey = "SeriesTimerKey";
-
 let _timer;
-
-const add = () => addSection(10);
+const _chime = new Audio("section.mp3");
 
 const start = () => {
   _chime.play();
   _chime.pause();
-  document.getElementById("button-stop").classList.remove("hide");
+  stopButtonElement.classList.remove("hide");
   startSession();
 };
 
@@ -79,21 +81,21 @@ const save = () => {
 }
 
 const showMeditation = () => {
-  document.getElementById("meditation").classList.remove("hide");
+  meditationElement.classList.remove("hide");
 }
 
 const showSavedMeditations = () => {
-  document.getElementById("savedMeditations").classList.remove("hide");
+  savedMeditationsElement.classList.remove("hide");
 }
 
 const showMeditationControls = () => {
-  document.getElementById("run-button").classList.remove("hide");
+  runButtonsElement.classList.remove("hide");
 }
 
 const getSavedItems=()=> JSON.parse(localStorage.getItem(storageKey)) ?? [];
 
 const load = (i) => {
-  stagesList.innerHTML = "";
+  stagesListElement.innerHTML = "";
   const items = getSavedItems();
   const item = items[i];
   nameElement.value = item.name;
@@ -108,10 +110,10 @@ const addSection = (duration) => {
   li.classList.add("section");
   const section = document.createElement("time-section")
   li.appendChild(section);
-  stagesList.appendChild(li);
+  stagesListElement.appendChild(li);
   section.querySelector(".time-range").value = duration;
   section.querySelector(".section-time").innerHTML = duration;
-  document.getElementById("run-buttons").classList.remove("hide");
+  runButtonsElement.classList.remove("hide");
 }
 
 const remove = (i) => {
@@ -123,12 +125,10 @@ const remove = (i) => {
 
 const createMeditation =() =>{
   nameElement.value = "";
-  stagesList.innerHTML = "";
+  stagesListElement.innerHTML = "";
   showMeditation();
   addSection(10);
 }
-
-
 
 const listSavedItems = (items) =>{
   let out = "";
@@ -141,7 +141,7 @@ const listSavedItems = (items) =>{
            </li>`;
     i++;
   }
-  document.getElementById("saved").innerHTML = out;
+  savedListElement.innerHTML = out;
 }
 
 const loadPage = () => {
@@ -150,14 +150,27 @@ const loadPage = () => {
   if (items.length === 0) {
     createMeditation();
     showMeditation();
-    document.getElementById("savedMeditations").classList.add("hide");
+    savedMeditationsElement.classList.add("hide");
   }
   else {
     showSavedMeditations();
-    document.getElementById("meditation").classList.add("hide");
+    meditationElement.classList.add("hide");
   }
 }
 
+const addHandlers =()=>{
+  addSectionButton.addEventListener("click",()=>addSection(10));
+  createButtonElement.addEventListener("click", ()=> createMeditation());
+  startButtonElement.addEventListener("click",()=> start());
+  stopButtonElement.addEventListener("click",()=> stop());
+  saveButtonElement.addEventListener("click",()=> save());
+}
 
 
+const init = ()=>{
+addHandlers();
 loadPage();
+console.log("page loaded.")
+} 
+
+init();
