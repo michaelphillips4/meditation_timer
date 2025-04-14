@@ -22,20 +22,33 @@
 
   <body>
     <header>
-      <h1 class="center">
+      <h1>
+        <div id="mobileh1" class="hide">
         <img width="48" height="48" src="lotus.png" alt="lotus"/>
         Meditation
         <img width="48" height="48" src="lotus.png" alt="lotus"/>
-      <br />Timer
+      <br />Timer</div>
+      <div id="h1" class="show">
+        <img width="48" height="48" src="lotus.png" alt="lotus" style="
+          float:left;padding-left: 20px;"/>
+        Meditation Timer
+        <img width="48" height="48" src="lotus.png" alt="lotus" 
+        style="float:right;padding-right: 20px;"/>
+      </div>
       </h1>
     </header>
+    <p>
+        <b>Important Info:</b> please turn off you screen lock when using this. Otherwise the timer will get paused when the screen locks.
+      </p>
     <main>
+      
       <div id="savedMeditations" class="hide">
         <fieldset>
           <legend>&emsp;Saved Meditations&emsp;</legend>
           <ol id="savedList"></ol>
         </fieldset>
         <button id="button-create">Create New Meditation</button>
+
       </div>
 
       <div id="meditation" class="hide">
@@ -45,7 +58,7 @@
       
        <ol id="stagesList"></ol>
         
-          <button id="addSectionButton">
+          <button id="addSectionButton" title="Add a Section of time, ending with a gong, to the meditation.">
             <i class="fa fa-plus"></i> Add Section 
           </button>
     
@@ -79,7 +92,10 @@
               <option value="Mindfulness of Breathing"></option>
               <option value="Metta Bhavana"></option>
             </datalist>
-            <button id="button-save"> <i class="fa fa-save"></i> Save</button>
+            <button id="button-save" 
+            title=
+            "This will save the time sections and name for future use. Saved meditations will be listed in the Saved meditations section at the top of the form. The Saved meditation area is only shown if there are saved meditations. Note currently any saved mediation are only currently stored in the browsers local storage."> 
+            <i class="fa fa-save"></i> Save</button>
           </fieldset>
           </div>
           </div>
