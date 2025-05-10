@@ -18,26 +18,35 @@ let wakeLock = null;
 
 const _chime = new Audio("section.mp3");
 
+const setWakeLock = () => {
+  if ("wakeLock" in navigator) {
+  navigator.wakeLock.request("screen").then((lock) => {
+    wakeLock = lock;
+    console.log("Wake Lock is active");
+  });
+}
+}
+
+const releaseWakeLock = () => {
+  wakeLock?.release().then(() => {
+    console.log("Wake Lock is released");
+    wakeLock = null;
+  })
+}
+
 const start = () => {
   _chime.play();
   _chime.pause();
   stopButtonElement.classList.remove("hide");
-  if ("wakeLock" in navigator) {
-    navigator.wakeLock.request("screen").then((lock) => {
-      wakeLock = lock;
-      console.log("Wake Lock is active");
-    });
-  }
+  setWakeLock();
   startSession();
 };
 
 const stop = () => {
   clearInterval(this._timer);
   displayTimer("");
-  wakeLock?.release().then(() => {
-    console.log("Wake Lock is released");
-    wakeLock = null;
-  })};
+  releaseWakeLock();
+};
 
 const chime = () => _chime.play();
 
@@ -75,7 +84,7 @@ const startSession = () => {
       displayTimer("finished ");
       // finished
       chime();
-      clearInterval(this._timer);
+      stop();
     }
 
   }, 1000);
