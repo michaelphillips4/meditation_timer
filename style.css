@@ -1,0 +1,151 @@
+
+body{
+  text-align: center;
+}
+
+main{
+
+  background-image: url("lotus.jpeg");
+  
+  background-position: center;
+  background-repeat:no-repeat ;
+  background-size:cover ;
+  
+}
+
+#button-start {
+  font-weight: bolder;
+  font-size: xx-large
+}
+
+
+li.section {
+  background-color: var(--bg-highlight);
+  color: inherit;
+  border-radius: 0.25rem 1rem 1rem 1rem;
+  padding: 10px;
+  margin: 10px;
+  border: 1px silver solid;
+}
+
+.saved-item {
+  background-color: var(--bg-highlight);
+  color: inherit;
+  border-radius: 1rem;
+  padding: 10px;
+  margin: 10px;
+  max-width: 60vw;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+legend ,label ,p, details{
+  background-color:light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
+  color:light-dark(#100c08, rgb(230, 230, 230));;
+  border-radius: 1rem;
+  
+}
+
+legend {
+ 
+  font-weight: bold;
+  font-size: larger;
+}
+
+
+details{
+  padding:10px ;
+}
+
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fa-trash:hover {
+  cursor: pointer;
+}
+
+h3,
+p,
+button {
+  margin: 10px;
+}
+
+input {
+  margin: 10px;
+  width: 85%;
+  border: 1px solid silver;
+}
+
+label {
+  padding-left: 10px;
+}
+
+header {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: black;
+  color: white;
+}
+
+fieldset {
+  border-radius: 1rem;
+}
+
+.fa-trash {
+  font-size: larger;
+}
+
+time-section > div {
+  padding: 10px;
+  padding-top: 0px;
+}
+
+@media (max-width: 850px) {
+  #button-start {
+    width: 100%;
+  }
+
+#mobileh1{
+  display: block;
+}
+
+#h1{
+  display: none;
+
+}
+
+#h1 > img {
+
+}
+
+ #savedMeditations {
+  margin-bottom: 10px;
+ }
+
+  button {
+    display: block;
+    margin: 0 auto;
+  }
+
+  #button-create,
+  #button-stop {
+    margin-top: 10px;
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  main {
+    background-blend-mode: luminosity;
+  }
+}
+
+
+@media (prefers-color-scheme: light) {
+ main {
+    background-blend-mode:normal ;
+  }
+}

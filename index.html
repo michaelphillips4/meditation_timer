@@ -2,122 +2,149 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>meditation timer</title>
+    <title>Meditation Timer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="timeSectionComponent.js" defer></script>
+    <script src="main.js" defer></script>
     <meta name="description" content="A Meditation Timer." />
   </head>
 
   <body>
     <header>
-      <h1 class="center">Meditation Timer</h1>
+      <h1>
+        <div id="mobileh1" class="hide">
+          <img width="48" height="48" src="lotus.png" alt="lotus" />
+          Meditation
+          <img width="48" height="48" src="lotus.png" alt="lotus" />
+          <br />Timer
+        </div>
+        <div id="h1" class="show">
+          <img
+            width="48"
+            height="48"
+            src="lotus.png"
+            alt="lotus"
+            style="float: left; padding-left: 20px"
+          />
+          Meditation Timer
+          <img
+            width="48"
+            height="48"
+            src="lotus.png"
+            alt="lotus"
+            style="float: right; padding-right: 20px"
+          />
+        </div>
+      </h1>
     </header>
 
     <main>
-      <h3>test </h3>
+      <div id="savedMeditations" class="hide">
+        <fieldset>
+          <legend>&emsp;Saved Meditations&emsp;</legend>
+          <ol id="savedList"></ol>
+       
+        <button id="button-create">Create New Meditation</button> 
+      </fieldset>
+      </div>
+
+      <div id="meditation" class="hide">
+        <fieldset>
+          <legend>&emsp;Meditation Sections&emsp;</legend>
+
+          <ol id="stagesList"></ol>
+
+          <button
+            id="addSectionButton"
+            title="Add a Section of time, ending with a gong, to the meditation."
+          >
+            <i class="fa fa-plus"></i> Add Section
+          </button>
+        </fieldset>
+
+        <div id="run-buttons" class="hide">
+          <button id="button-start">
+            <img
+              width="48"
+              height="48"
+              src="https://img.icons8.com/deco-color/48/meditation-guru.png"
+              alt="meditation-guru"
+            />
+            <br />
+            Start Meditation
+          </button>
+          <button id="button-stop" class="hide">
+            <i class="fa fa-close"></i> Stop Meditation
+          </button>
+
+          <p id="timer"></p>
+
+          <fieldset>
+            <legend>&emsp;Save This Meditation&emsp;</legend>
+
+            <label for="name"> Name&ensp;</label>
+
+            <input
+              type="text"
+              id="name"
+              placeholder=""
+              list="meditations-datalist"
+            />
+            <datalist id="meditations-datalist">
+              <option value="Mindfulness of Breathing"></option>
+              <option value="Metta Bhavana"></option>
+            </datalist>
+            <button
+              id="button-save"
+              title="This will save the time sections and name for future use. Saved meditations will be listed in the Saved meditations section at the top of the form. The Saved meditation area is only shown if there are saved meditations. Note currently any saved mediation are only currently stored in the browsers local storage."
+            >
+              <i class="fa fa-save"></i> Save
+            </button>
+          </fieldset>
+        </div>
+      </div>
+
       <p>
-      select time<input
+        <details>
+          <summary>Settings</summary>
+          <p>sample of sound and volume played at the end of each section.</p>
+
+          <audio controls>
+            <source src="section.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </details>
+      </p>
+    </main>
+    <footer class="center">
+      v1 by Michael Phillips <a href="http:\\www.area2.co.uk">Home</a>
+    </footer>
+
+    <template id="time-section-template">
+      <div>
+        <span class="section-time">10</span> minutes
+        <i class="fa fa-trash section-remove right"></i>
+      </div>
+
+      <input
+        class="time-range"
         type="range"
         step="1"
-        min="0"
+        min="1"
         value="10"
         max="60"
-        id="stage"
-        oninput="rangeChange()"
       />
-      <div>minutes <span id="minutes">10</span></div>
-     </p> 
-     <hr /> 
-     
-     <button onclick="add()">Add</button>
-     
-      <ol id="stagesList"></ol>
-      <div id="timer"></div>
-      <button onclick="start()">Start</button>
-    </main>
-
-    <script>
-      let stages = [];
-     
-      const stagesList = document.getElementById("stagesList");
-      const stage = document.getElementById("stage");
-     
-      const showStages = () => {
-        stagesList.innerHTML = "";
-        stages.map((e) => displayStage(e));
-      };
-
-      const displayStage = (stage) => {
-        const li = document.createElement("li");
-        li.innerText = stage;
-        stagesList.appendChild(li);
-      };
-
-      const addStage = () => {
-        console.log("addStage");
-        stages.push(parseInt(stage.value));
-      };
-
-      const add = () => {
-        addStage();
-        showStages();
-      };
-
-      const rangeChange = () => {
-        document.getElementById("minutes").innerText = stage.value;
-      };
-
-      const start = () =>  session();
-    
-      const chime = ()=> {
-        const c = new Audio( "section.mp3");
-        c.play();
-      }
-
-      const session = () => {
-        let time = 0;
-        console.log("timer start", stages, time);
-        let sectionIndex = 0;
-        let sectionTime = parseInt(stages[sectionIndex]);
-
-        const totalTime = stages.reduce((x, y) => x + y, 0);
-
-        const timerElement = document.getElementById("timer");
-
-        let _session = setInterval(() => {
-          time++;
-          console.log(
-            " index ",
-            sectionIndex,
-            "interval time ",
-            time,
-
-            " section time",
-            sectionTime
-          );
-          timerElement.innerHTML = `section ${sectionIndex} : ${time}`;
-
-          // console.log(">", sectionTime, time, stages);
-
-          if (time === sectionTime) {
-            sectionIndex++;
-            sectionTime += parseInt(stages[sectionIndex]);
-
-            console.log("section change ");
-            //section ended
-            chime();
-          }
-          if (time >= totalTime) {
-            console.log("cleared");
-            document.getElementById("timer").innerHTML = "finished";
-           
-            // finished
-          
-            chime(); 
-            clearInterval(_session);
-          }
-        }, 1000);
-      };
-    </script>
+    </template>
   </body>
 </html>
