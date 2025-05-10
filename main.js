@@ -14,19 +14,30 @@ const createButtonElement = document.getElementById("button-create");
 
 const storageKey = "SeriesTimerKey";
 let _timer;
+let wakeLock = null;
+
 const _chime = new Audio("section.mp3");
 
 const start = () => {
   _chime.play();
   _chime.pause();
   stopButtonElement.classList.remove("hide");
+  if ("wakeLock" in navigator) {
+    navigator.wakeLock.request("screen").then((lock) => {
+      wakeLock = lock;
+      console.log("Wake Lock is active");
+    });
+  }
   startSession();
 };
 
 const stop = () => {
   clearInterval(this._timer);
   displayTimer("");
-};
+  wakeLock?.release().then(() => {
+    console.log("Wake Lock is released");
+    wakeLock = null;
+  })};
 
 const chime = () => _chime.play();
 
