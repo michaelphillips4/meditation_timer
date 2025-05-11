@@ -13,7 +13,12 @@ main{
   
 }
 
+.info{
+  text-align: left;
+}
+
 #button-start {
+  margin-top: 10px;
   font-weight: bolder;
   font-size: xx-large
 }
