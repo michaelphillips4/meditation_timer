@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-QYMMTEL2W6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-QYMMTEL2W6");
+    </script>
     <meta charset="UTF-8" />
     <title>Meditation Timer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -125,15 +139,11 @@
 
           <details>
             <summary>&emsp;Save Meditation&emsp;</summary>
-            <fieldset >
+            <fieldset>
               <br />
               <label for="name"> Name&ensp;</label>
 
-              <input
-                type="text"
-                id="name"
-                list="meditations-datalist"
-              />
+              <input type="text" id="name" list="meditations-datalist" />
               <datalist id="meditations-datalist">
                 <option value="Mindfulness of Breathing"></option>
                 <option value="Metta Bhavana"></option>
