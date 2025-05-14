@@ -4,9 +4,18 @@ class TimeSectionComponent extends HTMLElement {
         const clone = template.content.cloneNode(true);
 
         const timeElement = clone.querySelector(".section-time");
+        const sectionLabelElement = clone.querySelector("label");
         const rangeElement = clone.querySelector(".time-range");
         const removeButton = clone.querySelector(".section-remove");
-       
+        
+        const sectionCount = document.querySelectorAll(".section").length
+        
+        const inputName = `section-range-${sectionCount}`;  
+
+        rangeElement.id =  inputName;
+        sectionLabelElement.htmlFor = inputName;
+
+             console.log(sectionLabelElement, rangeElement.name);    
         rangeElement.addEventListener(
             "input",
             (event) => (timeElement.innerText = event.target.value)

@@ -1,7 +1,7 @@
 
 const stagesListElement = document.getElementById("stagesList");
 const timerElement = document.getElementById("timer");
-const nameElement =  document.getElementById("name");
+const nameElement = document.getElementById("name");
 const stopButtonElement = document.getElementById("button-stop");
 const startButtonElement = document.getElementById("button-start");
 const saveButtonElement = document.getElementById("button-save");
@@ -16,17 +16,22 @@ const storageKey = "SeriesTimerKey";
 let _timer;
 let wakeLock = null;
 
-const _chime = new Audio("section.mp3");
+const _chime = new Audio("../gong.mp3");
 
+// Request permission to use the wake lock API
+// This is used to stop the screen from sleeping
 const setWakeLock = () => {
   if ("wakeLock" in navigator) {
-  navigator.wakeLock.request("screen").then((lock) => {
-    wakeLock = lock;
-    console.log("Wake Lock is active");
-  });
-}
+    navigator.wakeLock.request("screen").then((lock) => {
+      wakeLock = lock;
+      console.log("Wake Lock is active");
+    });
+  }
 }
 
+// Release the wake lock when the session is stopped
+// This is used to stop the screen from sleeping
+// and to stop the timer
 const releaseWakeLock = () => {
   wakeLock?.release().then(() => {
     console.log("Wake Lock is released");
@@ -34,6 +39,7 @@ const releaseWakeLock = () => {
   })
 }
 
+// Starts the meditation
 const start = () => {
   _chime.play();
   _chime.pause();
@@ -42,25 +48,33 @@ const start = () => {
   startSession();
 };
 
+// Stops the meditation
 const stop = () => {
   clearInterval(this._timer);
   displayTimer("");
   releaseWakeLock();
 };
 
+// Play the gong sound
 const chime = () => _chime.play();
 
+// Display the timer message
 const displayTimer = (value) => (timerElement.innerHTML = value);
 
+// creates the timer info message
 const timeStateMessage = (time, sectionIndex, stages) =>
   `<p>Current Section : ${sectionIndex + 1} (${stages[sectionIndex]} min)</p> 
    <p>Total Time : ${(Math.floor(time / 60)).toString().padStart(2, '0')}:
             ${(time % 60).toString().padStart(2, '0')}</p>`;
 
+
+// Get the stages for the meditation
 const getStages = () => [...document.querySelectorAll(".time-range")].map((e) =>
   parseInt(e.value)
 );
 
+
+// Run meditation sections
 const startSession = () => {
   const stages = getStages();
   const totalTime = stages.reduce((x, y) => x + y, 0);
@@ -90,6 +104,9 @@ const startSession = () => {
   }, 1000);
 };
 
+// Save the meditation session
+// Save the name and stages to local storage
+// and reload the page
 const save = () => {
   const itemData = {};
   itemData.name = nameElement.value;
@@ -100,20 +117,27 @@ const save = () => {
   loadPage();
 }
 
+// Show the meditation section/element
 const showMeditation = () => {
   meditationElement.classList.remove("hide");
 }
 
+// Show the saved meditations section/element
 const showSavedMeditations = () => {
   savedMeditationsElement.classList.remove("hide");
 }
 
+// Show the meditation section/element
 const showMeditationControls = () => {
   runButtonsElement.classList.remove("hide");
 }
 
-const getSavedItems=()=> JSON.parse(localStorage.getItem(storageKey)) ?? [];
+// Get the saved items from local storage
+const getSavedItems = () => JSON.parse(localStorage.getItem(storageKey)) ?? [];
 
+
+// Load the saved items from local storage
+// and set the name and stages
 const load = (i) => {
   stagesListElement.innerHTML = "";
   const items = getSavedItems();
@@ -125,6 +149,7 @@ const load = (i) => {
   showMeditation();
 }
 
+// Add a new section to the meditation
 const addSection = (duration) => {
   const li = document.createElement("li");
   li.classList.add("section");
@@ -136,6 +161,7 @@ const addSection = (duration) => {
   runButtonsElement.classList.remove("hide");
 }
 
+// Remove a section from the meditation
 const remove = (i) => {
   const data = JSON.parse(localStorage.getItem(storageKey)) ?? [];
   data.splice(i, 1);
@@ -143,14 +169,17 @@ const remove = (i) => {
   loadPage();
 }
 
-const createMeditation =() =>{
+// Create a new meditation 
+const createMeditation = () => {
   nameElement.value = "";
   stagesListElement.innerHTML = "";
   showMeditation();
   addSection(10);
 }
 
-const listSavedItems = (items) =>{
+// List the saved items in the saved list
+// and add a load and remove button to each item
+const listSavedItems = (items) => {
   let out = "";
   let i = 0;
   for (const item of items) {
@@ -164,6 +193,7 @@ const listSavedItems = (items) =>{
   savedListElement.innerHTML = out;
 }
 
+// Load the saved items from local storage
 const loadPage = () => {
   const items = getSavedItems();
   listSavedItems(items);
@@ -178,19 +208,21 @@ const loadPage = () => {
   }
 }
 
-const addHandlers =()=>{
-  addSectionButton.addEventListener("click",()=>addSection(10));
-  createButtonElement.addEventListener("click", ()=> createMeditation());
-  startButtonElement.addEventListener("click",()=> start());
-  stopButtonElement.addEventListener("click",()=> stop());
-  saveButtonElement.addEventListener("click",()=> save());
+// Add event handlers to the buttons
+const addHandlers = () => {
+  addSectionButton.addEventListener("click", () => addSection(10));
+  createButtonElement.addEventListener("click", () => createMeditation());
+  startButtonElement.addEventListener("click", () => start());
+  stopButtonElement.addEventListener("click", () => stop());
+  saveButtonElement.addEventListener("click", () => save());
 }
 
+// Initialize the app
+const init = () => {
+  addHandlers();
+  loadPage();
+  console.log("page loaded.")
+}
 
-const init = ()=>{
-addHandlers();
-loadPage();
-console.log("page loaded.")
-} 
-
+// Initialize the app
 init();

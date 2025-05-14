@@ -1,28 +1,27 @@
-
-body{
+body {
   text-align: center;
 }
 
-main{
-
-  background-image: url("lotus.jpeg");
-  
+main {
+  background-image: url("../images/lotus.jpeg");
   background-position: center;
-  background-repeat:no-repeat ;
-  background-size:cover ;
-  
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.info{
+.info {
   text-align: left;
 }
 
 #button-start {
   margin-top: 10px;
   font-weight: bolder;
-  font-size: xx-large
+  font-size: xx-large;
 }
 
+#name {
+  margin: auto;
+}
 
 li.section {
   background-color: var(--bg-highlight);
@@ -44,22 +43,22 @@ li.section {
   text-align: left;
 }
 
-legend ,label ,p, details{
-  background-color:light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
-  color:light-dark(#100c08, rgb(230, 230, 230));;
+legend,
+label,
+p,
+details {
+  background-color: light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
+  color: light-dark(#100c08, rgb(230, 230, 230));
   border-radius: 1rem;
-  
 }
 
 legend {
- 
   font-weight: bold;
   font-size: larger;
 }
 
-
-details{
-  padding:10px ;
+details {
+  padding: 10px;
 }
 
 ol {
@@ -113,22 +112,17 @@ time-section > div {
     width: 100%;
   }
 
-#mobileh1{
-  display: block;
-}
+  #middle-lotus {
+    display: block;
+  }
 
-#h1{
-  display: none;
+  #last-lotus {
+    display: none;
+  }
 
-}
-
-#h1 > img {
-
-}
-
- #savedMeditations {
-  margin-bottom: 10px;
- }
+  #savedMeditations {
+    margin-bottom: 10px;
+  }
 
   button {
     display: block;
@@ -141,16 +135,14 @@ time-section > div {
   }
 }
 
-
 @media (prefers-color-scheme: dark) {
   main {
     background-blend-mode: luminosity;
   }
 }
 
-
 @media (prefers-color-scheme: light) {
- main {
-    background-blend-mode:normal ;
+  main {
+    background-blend-mode: normal;
   }
 }
