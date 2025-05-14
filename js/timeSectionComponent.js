@@ -15,7 +15,7 @@ class TimeSectionComponent extends HTMLElement {
         rangeElement.id =  inputName;
         sectionLabelElement.htmlFor = inputName;
 
-             console.log(sectionLabelElement, rangeElement.name);    
+           
         rangeElement.addEventListener(
             "input",
             (event) => (timeElement.innerText = event.target.value)

@@ -221,7 +221,7 @@ const addHandlers = () => {
 const init = () => {
   addHandlers();
   loadPage();
-  console.log("page loaded.")
+  //console.log("page loaded.")
 }
 
 // Initialize the app
