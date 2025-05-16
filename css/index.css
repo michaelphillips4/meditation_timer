@@ -92,14 +92,10 @@ time-section > div {
   #savedMeditations {
     margin-bottom: 10px;
   }
-
-  button {
-    display: block;
-    margin: 0 auto;
-  }
+ 
 
   #button-create,
-  #button-stop {
-    margin-top: 10px;
+  #button-stop, #button-save{
+        margin-top: 10px;
   }
 }
