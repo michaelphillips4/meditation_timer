@@ -98,13 +98,32 @@
 
       <h2>Saved Meditations</h2>
       <p>
-        You can save your meditation sessions to use them again later. Click on
-        the "Save" button to save your current session.
+        You can save your meditation to use them again later. Click on
+        the "Save" button to save your current meditation.
         <br />
-        To load a saved session, click on the "Load" button next to the
+        To load a saved meditation, click on the "Load" button next to the
         meditation you want to use.
       </p>
-     
+
+      <h2>Embed Meditation Timer</h2>
+        <p>
+            You can embed the meditation timer in your own website. Just copy and
+            paste the code below into your HTML file.
+      <p>
+        <code>
+            <x id="links"> 
+                 &lt;iframe style="border:none" src="https://meditationintervaltimer.co.uk" height="800" width="500" title="Meditation Interval Timer" &gt;
+                 <br />
+                 &lt;/iframe &gt;
+            </x>
+           
+            <button class="copy-button" onclick="navigator.clipboard.writeText(document.getElementById('links').innerText)">
+              copy
+            </button>
+          </code>
+
+      </p>
+  
 <div class="center">
     <img src="images/lotus.jpeg" alt="lotus" class="app-image center" />
        
