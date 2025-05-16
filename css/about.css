@@ -1,0 +1,9 @@
+.app-image {
+  width: 90%;
+  object-fit: contain;
+  border-radius: 1%;
+}
+
+.copy-button {
+  float: right;
+}
