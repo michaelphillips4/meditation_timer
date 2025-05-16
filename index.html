@@ -41,7 +41,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/index.css" />
 
     <script src="js/timeSectionComponent.js" defer></script>
     <script src="js/main.js" defer></script>
@@ -73,6 +74,9 @@
         />
       </h1>
     </header>
+     <nav class="center">
+      <a href="about.html">About</a> 
+     </nav>
 
     <main>
       <div id="savedMeditations" class="hide">
@@ -92,24 +96,9 @@
 
       <div id="meditation" class="hide">
         <fieldset>
-          <legend>&emsp;Meditation Sections&emsp;</legend>
+          <legend>&emsp;Meditation &emsp;</legend>
 
-          <p>
-            <details>
-              <summary>Help</summary>
-              <p class="info">
-                Add sections to you meditation and set the section duration.
-                When the section ends a gong will sound.
-              </p>
-
-              <p>gong sample.</p>
-              <audio controls>
-                <source src="gong.mp3" type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-            </details>
-          </p>
-
+          
           <ol id="stagesList"></ol>
 
           <button
@@ -117,7 +106,7 @@
             title="Add a Section of time, ending with a gong, to the meditation."
             accesskey="n"
           >
-            <i class="fa fa-plus"></i> Add Section
+            <i class="fa fa-plus"></i> Add Another Section
           </button>
         </fieldset>
 

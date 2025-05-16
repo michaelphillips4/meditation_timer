@@ -1,12 +1,12 @@
-body {
+body{
   text-align: center;
 }
 
 main {
-  background-image: url("../images/lotus.jpeg");
+ /*  background-image: url("../images/lotus.jpeg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 }
 
 .info {
@@ -47,9 +47,9 @@ legend,
 label,
 p,
 details {
-  background-color: light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
+  /* background-color: light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
   color: light-dark(#100c08, rgb(230, 230, 230));
-  border-radius: 1rem;
+  border-radius: 1rem; */
 }
 
 legend {
@@ -87,13 +87,6 @@ label {
   padding-left: 10px;
 }
 
-header {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  background-color: black;
-  color: white;
-}
-
 fieldset {
   border-radius: 1rem;
 }
@@ -112,14 +105,7 @@ time-section > div {
     width: 100%;
   }
 
-  #middle-lotus {
-    display: block;
-  }
-
-  #last-lotus {
-    display: none;
-  }
-
+ 
   #savedMeditations {
     margin-bottom: 10px;
   }
@@ -132,17 +118,5 @@ time-section > div {
   #button-create,
   #button-stop {
     margin-top: 10px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  main {
-    background-blend-mode: luminosity;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  main {
-    background-blend-mode: normal;
   }
 }

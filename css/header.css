@@ -1,0 +1,43 @@
+
+main {
+margin-top: 10px;
+}
+
+nav {
+ 
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+header {
+   text-align: center;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: black;
+  color: white;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  main {
+    background-blend-mode: luminosity;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  main {
+    background-blend-mode: normal;
+  }
+}
+
+@media (max-width: 850px) {
+ 
+  #middle-lotus {
+    display: block;
+  }
+
+  #last-lotus {
+    display: none;
+  }
+ 
+}
