@@ -2,13 +2,6 @@ body{
   text-align: center;
 }
 
-main {
- /*  background-image: url("../images/lotus.jpeg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-}
-
 .info {
   text-align: left;
 }
@@ -41,15 +34,6 @@ li.section {
   max-width: 60vw;
   word-wrap: break-word;
   text-align: left;
-}
-
-legend,
-label,
-p,
-details {
-  /* background-color: light-dark(rgb(247, 248, 247), rgb(62, 60, 60));
-  color: light-dark(#100c08, rgb(230, 230, 230));
-  border-radius: 1rem; */
 }
 
 legend {
@@ -104,7 +88,6 @@ time-section > div {
   #button-start {
     width: 100%;
   }
-
  
   #savedMeditations {
     margin-bottom: 10px;
