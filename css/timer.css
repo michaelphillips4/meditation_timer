@@ -1,0 +1,106 @@
+body{
+  text-align: center;
+}
+
+.info {
+  text-align: left;
+}
+
+#button-start {
+  margin-top: 10px;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+#name {
+  margin: auto;
+}
+
+li.section {
+  background-color: var(--bg-highlight);
+  color: inherit;
+  border-radius: 0.25rem 1rem 1rem 1rem;
+  padding: 10px;
+  margin: 10px;
+  border: 1px silver solid;
+}
+
+.saved-item {
+  background-color: var(--bg-highlight);
+  color: inherit;
+  border-radius: 1rem;
+  padding: 10px;
+  margin: 10px;
+ 
+  word-wrap: break-word;
+  text-align: left;
+  color: inherit;
+  border-radius: 0.25rem 1rem 1rem 1rem;
+  padding: 10px;
+  margin: 10px;
+  border: 1px silver solid;
+}
+
+legend {
+  font-weight: bold;
+  font-size: larger;
+}
+
+details {
+  padding: 10px;
+}
+
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fa-trash:hover {
+  cursor: pointer;
+}
+
+h3,
+p,
+button {
+  margin: 10px;
+}
+
+input {
+  margin: 10px;
+  width: 85%;
+  border: 1px solid silver;
+}
+
+label {
+  padding-left: 10px;
+}
+
+fieldset {
+  border-radius: 1rem;
+}
+
+.fa-trash {
+  font-size: larger;
+}
+
+time-section > div {
+  padding: 10px;
+  padding-top: 0px;
+}
+
+@media (max-width: 850px) {
+  #button-start {
+    width: 100%;
+  }
+ 
+  #savedMeditations {
+    margin-bottom: 10px;
+  }
+ 
+
+  #button-create,
+  #button-stop, #button-save{
+        margin-top: 10px;
+  }
+}

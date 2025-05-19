@@ -1,101 +1,41 @@
-body{
+.button:link, .button:visited {
+  background-color: black;
+  color: white;
+  padding: 14px 25px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px;
+  cursor:wait
 }
 
-.info {
-  text-align: left;
+.button:hover, .button:active {
+  background-color:  black;
+  color: white;
 }
 
-#button-start {
-  margin-top: 10px;
-  font-weight: bolder;
-  font-size: xx-large;
+blockquote {
+    font-size: 1.5em;
+    font-style: italic;
+    color: #333;
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-left: 5px solid #ccc;
+    background-color: #f9f9f9;
 }
 
-#name {
-  margin: auto;
+blockquote:before {
+    content: open-quote;
+  
 }
 
-li.section {
-  background-color: var(--bg-highlight);
-  color: inherit;
-  border-radius: 0.25rem 1rem 1rem 1rem;
-  padding: 10px;
-  margin: 10px;
-  border: 1px silver solid;
+blockquote:after {
+    content: close-quote;
+
 }
 
-.saved-item {
-  background-color: var(--bg-highlight);
-  color: inherit;
-  border-radius: 1rem;
-  padding: 10px;
-  margin: 10px;
-  max-width: 60vw;
-  word-wrap: break-word;
-  text-align: left;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-legend {
-  font-weight: bold;
-  font-size: larger;
-}
-
-details {
-  padding: 10px;
-}
-
-ol {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.fa-trash:hover {
-  cursor: pointer;
-}
-
-h3,
-p,
-button {
-  margin: 10px;
-}
-
-input {
-  margin: 10px;
-  width: 85%;
-  border: 1px solid silver;
-}
-
-label {
-  padding-left: 10px;
-}
-
-fieldset {
-  border-radius: 1rem;
-}
-
-.fa-trash {
-  font-size: larger;
-}
-
-time-section > div {
-  padding: 10px;
-  padding-top: 0px;
-}
-
-@media (max-width: 850px) {
-  #button-start {
-    width: 100%;
-  }
- 
-  #savedMeditations {
-    margin-bottom: 10px;
-  }
- 
-
-  #button-create,
-  #button-stop, #button-save{
-        margin-top: 10px;
-  }
-}

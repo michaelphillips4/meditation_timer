@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-QYMMTEL2W6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-QYMMTEL2W6");
+    </script>
+    <meta charset="UTF-8" />
+    <title>Meditation Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/timer.css" />
+
+    <script src="js/timeSectionComponent.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <meta name="description" content="A Meditation Timer." />
+    <meta name="google-adsense-account" content="ca-pub-5667920797558447">
+  </head>
+
+  <body>
+    <header>
+      <h1>
+        <img width="48" height="48" src="images/lotus.png" alt="lotus" />
+        Meditation
+        <img
+          width="48"
+          height="48"
+          style="float: right; padding-right: 10px"
+          src="images/lotus.png"
+          alt="lotus"
+          class="hide"
+          id="middle-lotus"
+        />
+        Timer
+        <img
+          width="48"
+          height="48"
+          src="images/lotus.png"
+          alt="lotus"
+          id="last-lotus"
+        />
+      </h1>
+    </header>
+        <nav class="center">
+       <a href="/" class="nav-item">Home</a>
+       <a href="timer.html"  class="nav-item" >Timer</a>
+      <a href="about.html"  class="nav-item">About</a>
+     
+    </nav>
+
+    <main>
+      <div id="savedMeditations" class="hide">
+        <fieldset>
+          <legend>&emsp;Saved Meditations&emsp;</legend>
+          <ol id="savedList"></ol>
+
+          <button
+            id="button-create"
+            accesskey="c"
+            title="Create New Meditation"
+          >
+            Create New Meditation
+          </button>
+        </fieldset>
+      </div>
+
+      <div id="meditation" class="hide">
+        <fieldset>
+          <legend>&emsp;Meditation &emsp;</legend>
+
+          
+          <ol id="stagesList"></ol>
+
+          <button
+            id="addSectionButton"
+            title="Add a Section of time, ending with a gong, to the meditation."
+            accesskey="n"
+          >
+            <i class="fa fa-plus"></i> Add Another Section
+          </button>
+        </fieldset>
+
+        <div id="run-buttons" class="hide">
+          <button id="button-start" accesskey="s">
+            <img
+              width="48"
+              height="48"
+              src="images/meditation-guru.png"
+              alt="meditation-guru"
+            />
+            <br />
+            Start Meditation
+          </button>
+          <button id="button-stop" class="hide">
+            <i class="fa fa-close"></i> Stop Meditation
+          </button>
+
+          <p id="timer"></p>
+
+          <details>
+            <summary>&emsp;Save Meditation&emsp;</summary>
+            <fieldset>
+              <br />
+              <label for="name"> Name Of Meditation&ensp;</label>
+
+              <input type="text" id="name" list="meditations-datalist" />
+              <datalist id="meditations-datalist">
+                <option value="Mindfulness of Breathing"></option>
+                <option value="Metta Bhavana"></option>
+              </datalist>
+              <button
+                id="button-save"
+                title="This will save the time sections and name for future use. Saved meditations will be listed in the Saved meditations section at the top of the form. The Saved meditation area is only shown if there are saved meditations. Note currently any saved mediation are only currently stored in the browsers local storage."
+              >
+                <i class="fa fa-save"></i> Save
+              </button>
+            </fieldset>
+          </details>
+        </div>
+      </div>
+    </main>
+
+
+    <template id="time-section-template">
+      <div>
+        <label>
+          <span class="section-time">10</span> minutes
+          <i class="fa fa-trash section-remove right"></i>
+        </label>
+      </div>
+
+      <input
+        class="time-range"
+        type="range"
+        step="1"
+        min="1"
+        value="10"
+        max="60"
+      />
+    </template>
+  </body>
+</html>
