@@ -3,6 +3,7 @@ const stagesListElement = document.getElementById("stagesList");
 const timerElement = document.getElementById("timer");
 const nameElement = document.getElementById("name");
 const stopButtonElement = document.getElementById("button-stop");
+const pauseButtonElement = document.getElementById("button-pause");
 const startButtonElement = document.getElementById("button-start");
 const saveButtonElement = document.getElementById("button-save");
 const meditationElement = document.getElementById("meditation");
@@ -15,7 +16,7 @@ const createButtonElement = document.getElementById("button-create");
 const storageKey = "SeriesTimerKey";
 let _timer;
 let wakeLock = null;
-
+let paused = false
 const _chime = new Audio("../gong.mp3");
 
 // Request permission to use the wake lock API
@@ -44,6 +45,7 @@ const start = () => {
   _chime.play();
   _chime.pause();
   stopButtonElement.classList.remove("hide");
+   pauseButtonElement.classList.remove("hide");
   setWakeLock();
   startSession();
 };
@@ -84,6 +86,8 @@ const startSession = () => {
   let sectionTime = parseInt(stages[sectionIndex]);
 
   this._timer = setInterval(() => {
+
+    if(!paused) {
     time++;
 
     displayTimer(timeStateMessage(time, sectionIndex, stages));
@@ -100,7 +104,7 @@ const startSession = () => {
       chime();
       stop();
     }
-
+  }
   }, 1000);
 };
 
@@ -215,6 +219,14 @@ const addHandlers = () => {
   startButtonElement.addEventListener("click", () => start());
   stopButtonElement.addEventListener("click", () => stop());
   saveButtonElement.addEventListener("click", () => save());
+  pauseButtonElement.addEventListener("click", () => {
+    paused = !paused;
+    if (paused) {
+      pauseButtonElement.innerHTML = "<i class='fa fa-pause'></i> Resume";
+    } else {
+      pauseButtonElement.innerHTML = "<i class='fa fa-pause'></i> Pause";
+    }
+  });
 }
 
 // Initialize the app

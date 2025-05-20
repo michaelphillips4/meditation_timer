@@ -7,9 +7,17 @@ body{
 }
 
 #button-start {
+  
+  margin: auto;
   margin-top: 10px;
   font-weight: bolder;
-  font-size: xx-large;
+  font-size: larger;
+  
+}
+
+#button-pause, #button-stop
+{
+  width: 178px;
 }
 
 #name {
@@ -97,10 +105,9 @@ time-section > div {
   #savedMeditations {
     margin-bottom: 10px;
   }
- 
 
-  #button-create,
-  #button-stop, #button-save{
-        margin-top: 10px;
-  }
+  #button-stop{
+        margin-top: 0;
+  } 
+  
 }
