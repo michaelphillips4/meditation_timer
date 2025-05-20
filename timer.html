@@ -6,6 +6,7 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-QYMMTEL2W6"
     ></script>
+    <script src="https://orca1.orca-tools.com/orca.js"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -47,7 +48,7 @@
     <script src="js/timeSectionComponent.js" defer></script>
     <script src="js/main.js" defer></script>
     <meta name="description" content="A Meditation Timer." />
-    <meta name="google-adsense-account" content="ca-pub-5667920797558447">
+    <meta name="google-adsense-account" content="ca-pub-5667920797558447" />
   </head>
 
   <body>
@@ -74,11 +75,10 @@
         />
       </h1>
     </header>
-        <nav class="center">
-       <a href="/" class="nav-item">Home</a>
-       <a href="timer.html"  class="nav-item" >Timer</a>
-      <a href="about.html"  class="nav-item">About</a>
-     
+    <nav class="center">
+      <a href="/" class="nav-item">Home</a>
+      <a href="timer.html" class="nav-item">Timer</a>
+      <a href="about.html" class="nav-item">About</a>
     </nav>
 
     <main>
@@ -101,7 +101,6 @@
         <fieldset>
           <legend>&emsp;Meditation &emsp;</legend>
 
-          
           <ol id="stagesList"></ol>
 
           <button
@@ -130,29 +129,18 @@
 
           <p id="timer"></p>
 
-          <details>
-            <summary>&emsp;Save Meditation&emsp;</summary>
-            <fieldset>
-              <br />
-              <label for="name"> Name Of Meditation&ensp;</label>
+         
+          <button
+            onclick="Dialog.open('saveMeditationDialog')"
+            title="This will save the time sections and name for future use. Saved meditations will be listed in the Saved meditations section at the top of the form. The Saved meditation area is only shown if there are saved meditations. Note currently any saved mediation are only currently stored in the browsers local storage."
+          >
+            <i class="fa fa-save"></i> Save
+          </button>
 
-              <input type="text" id="name" list="meditations-datalist" />
-              <datalist id="meditations-datalist">
-                <option value="Mindfulness of Breathing"></option>
-                <option value="Metta Bhavana"></option>
-              </datalist>
-              <button
-                id="button-save"
-                title="This will save the time sections and name for future use. Saved meditations will be listed in the Saved meditations section at the top of the form. The Saved meditation area is only shown if there are saved meditations. Note currently any saved mediation are only currently stored in the browsers local storage."
-              >
-                <i class="fa fa-save"></i> Save
-              </button>
-            </fieldset>
-          </details>
+        
         </div>
       </div>
     </main>
-
 
     <template id="time-section-template">
       <div>
@@ -171,5 +159,16 @@
         max="60"
       />
     </template>
+
+    <dialog id="saveMeditationDialog">
+      <label for="name"> Name Of Meditation&ensp;</label>
+      <input type="text" id="name" list="meditations-datalist" />
+      <datalist id="meditations-datalist">
+        <option value="Mindfulness of Breathing"></option>
+        <option value="Metta Bhavana"></option>
+      </datalist>
+      <button id="button-save" onclick='Dialog.close("SaveMeditationDialog")'>Save</button>
+      <button onclick='Dialog.close("saveMeditationDialog")'>Close</button>
+    </dialog>
   </body>
 </html>
