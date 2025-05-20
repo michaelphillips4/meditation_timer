@@ -1,5 +1,5 @@
 .button:link, .button:visited {
-   background-color: var(--bg-highlight);
+  background-color: var(--bg-highlight);
   color: inherit;
   padding: 14px 25px;
   text-align: center;
@@ -15,7 +15,7 @@
 }
 
 blockquote {
-    font-size: 1.5em;
+    font-size: larger;
     font-style: italic;
    
     margin: 20px 0;

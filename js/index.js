@@ -18,10 +18,10 @@ const loadQuote = async () => {
 }
 
 const loadImage = async () => { 
-const pics =["pic1.jpeg", "pic2.jpeg", "pic3.jpeg", "pic4.jpeg"];
-const randomPic = pics[Math.floor(Math.random() * pics.length)];
+
+const ri = Math.floor(Math.random() * 5);
 const imageElement = document.getElementById("image");
-imageElement.src = "images/piclist/"+ randomPic;
+imageElement.src = `images/piclist/pic${ri}.jpeg`;
 
 }
 
