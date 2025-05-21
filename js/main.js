@@ -42,8 +42,8 @@ const releaseWakeLock = () => {
 
 // Starts the meditation
 const start = () => {
-  // _chime.play();
-  // _chime.pause();
+  _chime.play();
+  _chime.pause();
   stopButtonElement.classList.remove("hide");
   pauseButtonElement.classList.remove("hide");
   setWakeLock();
@@ -103,19 +103,17 @@ const runMeditation = () => {
 
       if (currentTotalSeconds === (nextSectionEnd * 60)) {
         // section ended
-        console.log("section ended", sectionIndex, stages[sectionIndex]);
         chime(stages[sectionIndex].sound);
         if (sectionIndex < (stages.length - 1)) {
           sectionIndex++;
           nextSectionEnd += parseInt(stages[sectionIndex].duration);
-          console.log("next section", nextSectionEnd);
         }
       }
       if (currentTotalSeconds >= (totalTime * 60)) {
 
         // finished
         chime(stages[sectionIndex].sound);
-        stop("Meditation Finished - go well");
+        stop("Meditation Finished.");
       }
     }
   }, 1000);
