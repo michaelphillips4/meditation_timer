@@ -42,8 +42,7 @@ const releaseWakeLock = () => {
 
 // Starts the meditation
 const start = () => {
-  _chime.play();
-  _chime.pause();
+ 
   stopButtonElement.classList.remove("hide");
   pauseButtonElement.classList.remove("hide");
   setWakeLock();
@@ -57,10 +56,11 @@ const stop = (message) => {
   releaseWakeLock();
 };
 
-// Play the gong sound
-const chime = (sound) => {
+// load the chime sound
+const loadChime = (sound) => {
   _chime = new Audio(`../sounds/${sound}`);
-  _chime.play();
+   _chime.play();
+  _chime.pause();
 }
 // Display the timer message
 const displayTimerValues = (value) => (timerElement.innerHTML = value);
@@ -93,6 +93,8 @@ const runMeditation = () => {
   let currentTotalSeconds = 0;
   let sectionIndex = 0;
   let nextSectionEnd = parseInt(stages[sectionIndex].duration);
+  
+  loadChime(stages[sectionIndex].sound);
 
   this._timer = setInterval(() => {
 
@@ -103,16 +105,17 @@ const runMeditation = () => {
 
       if (currentTotalSeconds === (nextSectionEnd * 60)) {
         // section ended
-        chime(stages[sectionIndex].sound);
+        _chime.play();
         if (sectionIndex < (stages.length - 1)) {
           sectionIndex++;
           nextSectionEnd += parseInt(stages[sectionIndex].duration);
+          loadChime(stages[sectionIndex].sound);
         }
       }
       if (currentTotalSeconds >= (totalTime * 60)) {
 
         // finished
-        chime(stages[sectionIndex].sound);
+        _chime.play();
         stop("Meditation Finished.");
       }
     }
