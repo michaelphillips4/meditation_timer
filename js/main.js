@@ -17,7 +17,7 @@ const storageKey = "SeriesTimerKey";
 let _timer;
 let wakeLock = null;
 let paused = false
-const _chime = new Audio("../gong.mp3");
+let _chime = new Audio("../sounds/gong.mp3");
 
 // Request permission to use the wake lock API
 // This is used to stop the screen from sleeping
@@ -42,69 +42,82 @@ const releaseWakeLock = () => {
 
 // Starts the meditation
 const start = () => {
-  _chime.play();
-  _chime.pause();
+  // _chime.play();
+  // _chime.pause();
   stopButtonElement.classList.remove("hide");
-   pauseButtonElement.classList.remove("hide");
+  pauseButtonElement.classList.remove("hide");
   setWakeLock();
-  startSession();
+  runMeditation();
 };
 
 // Stops the meditation
-const stop = () => {
+const stop = (message) => {
   clearInterval(this._timer);
-  displayTimer("");
+  displayTimerValues(message);
   releaseWakeLock();
 };
 
 // Play the gong sound
-const chime = () => _chime.play();
-
+const chime = (sound) => {
+  _chime = new Audio(`../sounds/${sound}`);
+  _chime.play();
+}
 // Display the timer message
-const displayTimer = (value) => (timerElement.innerHTML = value);
+const displayTimerValues = (value) => (timerElement.innerHTML = value);
 
 // creates the timer info message
-const timeStateMessage = (time, sectionIndex, stages) =>
-  `<p>Current Section : ${sectionIndex + 1} (${stages[sectionIndex]} min)</p> 
-   <p>Total Time : ${(Math.floor(time / 60)).toString().padStart(2, '0')}:
-            ${(time % 60).toString().padStart(2, '0')}</p>`;
+const timeStateMessage = (time, sectionIndex, stages) => {
+  const totalTime = stages.reduce((x, y) => x + parseInt(y.duration), 0);
 
+  return `<p>Current Section <b>${sectionIndex + 1}</b> of ${stages.length} Duration ${stages[sectionIndex].duration} min</p> 
+   <p>Total Meditation Time <b>${formatTime(time / 60)}:${formatTime(time % 60)}</b> of ${totalTime} mins</p>`
+};
+
+const formatTime = (timeValue) => Math.floor(timeValue).toString().padStart(2, '0');
 
 // Get the stages for the meditation
-const getStages = () => [...document.querySelectorAll(".time-range")].map((e) =>
-  parseInt(e.value)
+const getStages = () => [...document.querySelectorAll(".time-range")].map((e) => {
+  return {
+    sound: e.parentElement.querySelector("select").value,
+    duration: parseInt(e.value)
+  }
+}
 );
 
 
 // Run meditation sections
-const startSession = () => {
+const runMeditation = () => {
   const stages = getStages();
-  const totalTime = stages.reduce((x, y) => x + y, 0);
+  const totalTime = stages.reduce((x, y) => x + y.duration, 0);
 
-  let time = 0;
+  let currentTotalSeconds = 0;
   let sectionIndex = 0;
-  let sectionTime = parseInt(stages[sectionIndex]);
+  let nextSectionEnd = parseInt(stages[sectionIndex].duration);
 
   this._timer = setInterval(() => {
 
-    if(!paused) {
-    time++;
+    if (!paused) {
+      currentTotalSeconds++;
 
-    displayTimer(timeStateMessage(time, sectionIndex, stages));
+      displayTimerValues(timeStateMessage(currentTotalSeconds, sectionIndex, stages));
 
-    if (time === (sectionTime * 60)) {
-      sectionIndex++;
-      sectionTime += parseInt(stages[sectionIndex]);
-      //section ended
-      chime();
+      if (currentTotalSeconds === (nextSectionEnd * 60)) {
+        // section ended
+        console.log("section ended", sectionIndex, stages[sectionIndex]);
+        chime(stages[sectionIndex].sound);
+        if (sectionIndex < (stages.length - 1)) {
+          sectionIndex++;
+          nextSectionEnd += parseInt(stages[sectionIndex].duration);
+          console.log("next section", nextSectionEnd);
+        }
+      }
+      if (currentTotalSeconds >= (totalTime * 60)) {
+
+        // finished
+        chime(stages[sectionIndex].sound);
+        stop("Meditation Finished - go well");
+      }
     }
-    if (time >= (totalTime * 60)) {
-      displayTimer("finished ");
-      // finished
-      chime();
-      stop();
-    }
-  }
   }, 1000);
 };
 
@@ -147,21 +160,21 @@ const load = (i) => {
   const items = getSavedItems();
   const item = items[i];
   nameElement.value = item.name;
-  for (const duration of item.stages) {
-    addSection(duration);
+  for (const stage of item.stages) {
+    lastSetValue = stage.duration;
+    chimeSound = stage.sound;
+    addSection();
   }
   showMeditation();
 }
 
 // Add a new section to the meditation
-const addSection = (duration) => {
+const addSection = () => {
   const li = document.createElement("li");
   li.classList.add("section");
   const section = document.createElement("time-section")
   li.appendChild(section);
   stagesListElement.appendChild(li);
-  section.querySelector(".time-range").value = duration;
-  section.querySelector(".section-time").innerHTML = duration;
   runButtonsElement.classList.remove("hide");
 }
 
@@ -178,7 +191,7 @@ const createMeditation = () => {
   nameElement.value = "";
   stagesListElement.innerHTML = "";
   showMeditation();
-  addSection(10);
+  addSection();
 }
 
 // List the saved items in the saved list
@@ -189,7 +202,7 @@ const listSavedItems = (items) => {
   for (const item of items) {
     out += `<li class="saved-item"> 
            <a href="#" onclick=load(${i})>Load</a> 
-           Name : ${item.name} (${item.stages.join("mins,")}mins).
+           Name : ${item.name} (${item.stages.map(e => e.duration).join("mins,")}mins).
            <i class="fa fa-trash section-remove right" onclick=remove(${i})></i> 
            </li>`;
     i++;
@@ -214,10 +227,10 @@ const loadPage = () => {
 
 // Add event handlers to the buttons
 const addHandlers = () => {
-  addSectionButton.addEventListener("click", () => addSection(10));
+  addSectionButton.addEventListener("click", () => addSection());
   createButtonElement.addEventListener("click", () => createMeditation());
   startButtonElement.addEventListener("click", () => start());
-  stopButtonElement.addEventListener("click", () => stop());
+  stopButtonElement.addEventListener("click", () => stop(""));
   saveButtonElement.addEventListener("click", () => save());
   pauseButtonElement.addEventListener("click", () => {
     paused = !paused;

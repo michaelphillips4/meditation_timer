@@ -52,7 +52,7 @@
   </head>
 
   <body>
-     <header>
+    <header>
       <h1>
         <img width="48" height="48" src="images/lotus.png" alt="lotus" />
         Meditation
@@ -76,10 +76,9 @@
       </h1>
     </header>
     <nav class="center">
-       <a href="/" class="nav-item">Home</a>
-       <a href="timer.html"  class="nav-item" >Timer</a>
-      <a href="about.html"  class="nav-item">About</a>
-     
+      <a href="/" class="nav-item">Home</a>
+      <a href="timer.html" class="nav-item">Timer</a>
+      <a href="about.html" class="nav-item">About</a>
     </nav>
 
     <main>
@@ -124,46 +123,51 @@
             <br />
             Start Meditation
           </button>
-        <br />
+          <br />
           <button id="button-pause" class="hide">
             <i class="fa fa-pause"></i> Pause Meditation
           </button>
-         
+
           <button id="button-stop" class="hide">
             <i class="fa fa-close"></i> Stop Meditation
           </button>
 
           <p id="timer"></p>
 
-         
           <button
             onclick="Dialog.open('saveMeditationDialog')"
             title="This will save the time sections and name for future use. Saved meditations will be listed in the Saved meditations section at the top of the form. The Saved meditation area is only shown if there are saved meditations. Note currently any saved mediation are only currently stored in the browsers local storage."
           >
             <i class="fa fa-save"></i> Save
           </button>
-
-        
         </div>
       </div>
     </main>
 
     <template id="time-section-template">
       <div>
-        <label>
+        <label class="section-range-label">
           <span class="section-time">10</span> minutes
           <i class="fa fa-trash section-remove right"></i>
         </label>
       </div>
-
-      <input
-        class="time-range"
-        type="range"
-        step="1"
-        min="1"
-        value="10"
-        max="60"
-      />
+      <div class="center">
+        <input
+          class="time-range"
+          type="range"
+          step="1"
+          min="1"
+          value="10"
+          max="60"
+        />
+        <label for="sound" class="sound-select-label"
+          >Select an end sound.</label
+        >
+        <select id="sound" class="sound-select">
+          <option value="chime.mp3">Chime</option>
+          <option value="gong.mp3" selected>Gong</option>
+        </select>
+      </div>
     </template>
 
     <dialog id="saveMeditationDialog">
@@ -173,7 +177,9 @@
         <option value="Mindfulness of Breathing"></option>
         <option value="Metta Bhavana"></option>
       </datalist>
-      <button id="button-save" onclick='Dialog.close("SaveMeditationDialog")'>Save</button>
+      <button id="button-save" onclick='Dialog.close("saveMeditationDialog")'>
+        Save
+      </button>
       <button onclick='Dialog.close("saveMeditationDialog")'>Close</button>
     </dialog>
   </body>

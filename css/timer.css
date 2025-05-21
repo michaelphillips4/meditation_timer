@@ -6,6 +6,11 @@ body{
   text-align: left;
 }
 
+#timer{
+  font-size: large;
+ 
+}
+
 #button-start {
   
   margin: auto;
@@ -74,10 +79,14 @@ button {
   margin: 10px;
 }
 
-input {
-  margin: 10px;
+input,select {
+  margin: auto;
   width: 85%;
   border: 1px solid silver;
+}
+
+select {
+  font-size:medium;
 }
 
 label {

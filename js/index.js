@@ -1,7 +1,4 @@
 
-
-
-
 let quotes = [];
 
 const loadQuote = async () => {
