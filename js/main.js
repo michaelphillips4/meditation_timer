@@ -17,7 +17,10 @@ const storageKey = "SeriesTimerKey";
 let _timer;
 let wakeLock = null;
 let paused = false
-let _chime = new Audio("../sounds/gong.mp3");
+
+const soundsMap = new Map() 
+soundsMap.set("Bell", new Audio("../sounds/Bell.mp3"));
+soundsMap.set("Bowl", new Audio("../sounds/Bowl.mp3"));
 
 // Request permission to use the wake lock API
 // This is used to stop the screen from sleeping
@@ -55,13 +58,6 @@ const stop = (message) => {
   releaseWakeLock();
 };
 
-// load the chime sound
-const loadChime = (sound) => {
-  _chime = new Audio(`../sounds/${sound}`);
-  // hack for safari - where sounds are not played without user interaction this seems to work.
-   _chime.play();
-  _chime.pause();
-}
 
 // Display the timer message
 const displayTimerValues = (value) => (timerElement.innerHTML = value);
@@ -90,13 +86,17 @@ const getStages = () => [...document.querySelectorAll(".time-range")].map((e) =>
 const runMeditation = () => {
   const stages = getStages();
   const totalTime = stages.reduce((x, y) => x + y.duration, 0);
-
   let currentTotalSeconds = 0;
   let sectionIndex = 0;
   let nextSectionEnd = parseInt(stages[sectionIndex].duration);
   
-  loadChime(stages[sectionIndex].sound);
-
+  //preload sounds for iphone hack
+  for (const value of soundsMap.values()) {
+    value.play();
+    value.pause();
+     console.log(value);
+  }
+ 
   this._timer = setInterval(() => {
 
     if (!paused) {
@@ -106,7 +106,7 @@ const runMeditation = () => {
 
       if (currentTotalSeconds === (nextSectionEnd * 60)) {
         // section ended
-        _chime.play();
+        soundsMap.get(stages[sectionIndex].sound).play();
         if (sectionIndex < (stages.length - 1)) {
           sectionIndex++;
           nextSectionEnd += parseInt(stages[sectionIndex].duration);
@@ -116,7 +116,7 @@ const runMeditation = () => {
       if (currentTotalSeconds >= (totalTime * 60)) {
 
         // finished
-        _chime.play();
+       soundsMap.get(stages[sectionIndex].sound).play();
         stop("Meditation Finished.");
       }
     }

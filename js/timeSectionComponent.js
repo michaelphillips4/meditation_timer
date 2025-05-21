@@ -41,13 +41,14 @@ soundSelectElement.value = chimeSound;
 
 
     soundSelectElement.addEventListener("change", (event) => {
-            chime(event.target.value);
+         const x = new Audio("../sounds/" + event.target.value +".mp3" );
+         x.play();
         });
 
         this.innerHTML = "";
         this.appendChild(clone);
     }
 }
-let chimeSound = "gong.mp3";
+let chimeSound = "Bowl";
 let lastSetValue = 10; // Default value for the range input this is updated to preserve the last set value
 customElements.define("time-section", TimeSectionComponent);
