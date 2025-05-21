@@ -15,7 +15,7 @@
 
       gtag("config", "G-QYMMTEL2W6");
     </script>
-   
+
     <meta charset="UTF-8" />
     <title>Meditation Timer (about)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,7 +50,7 @@
   </head>
 
   <body>
-   <header>
+    <header>
       <h1>
         <img width="48" height="48" src="images/lotus.png" alt="lotus" />
         Meditation
@@ -74,10 +74,9 @@
       </h1>
     </header>
     <nav class="center">
-       <a href="/" class="nav-item">Home</a>
-       <a href="timer.html"  class="nav-item" >Timer</a>
-      <a href="about.html"  class="nav-item">About</a>
-     
+      <a href="/" class="nav-item">Home</a>
+      <a href="timer.html" class="nav-item">Timer</a>
+      <a href="about.html" class="nav-item">About</a>
     </nav>
     <main class="info">
       <h2>About</h2>
@@ -92,52 +91,66 @@
         Add sections to you meditation and set the section duration. When the
         section ends a gong will sound.
       </p>
-      <b>gong sample.</b><br /><br />
-      <audio controls>
-        <source src="gong.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-
+      <h2>Sounds</h2>
+      <p>
+        gong <br />
+        <audio controls>
+          <source src="/sounds/gong.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        <br />
+        chime <br />
+        <audio controls>
+          <source src="/sounds/chime.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </p>
       <h2>Saved Meditations</h2>
       <p>
-        You can save your meditation to use them again later. Click on
-        the "Save" button to save your current meditation.
+        You can save your meditation to use them again later. Click on the
+        "Save" button to save your current meditation.
         <br />
         To load a saved meditation, click on the "Load" button next to the
         meditation you want to use.
       </p>
 
       <h2>Embed Meditation Timer</h2>
-        <p>
-            You can embed the meditation timer in your own website. Just copy and
-            paste the code below into your HTML file.
+      <p>
+        You can embed the meditation timer in your own website. Just copy and
+        paste the code below into your HTML file.
+      </p>
+
       <p>
         <code>
-            <x id="links"> 
-                 &lt;iframe <br /> 
-                 style="border:none"  <br />
-                 height="800"  <br />
-                 width="500"  <br />
-                 title="Meditation Interval Timer"  <br />
-                 src= <br />"https://meditationintervaltimer.co.uk"  <br />
-                 &gt;
-                 <br />
-                 &lt;/iframe &gt;
-            </x>
-           
-            <button class="copy-button" onclick="navigator.clipboard.writeText(document.getElementById('links').innerText)">
-              copy
-            </button>
-          </code>
+          <x id="links">
+            &lt;iframe <br />
+            style="border:none" <br />
+            height="800" <br />
+            width="500" <br />
+            title="Meditation Interval Timer" <br />
+            src= <br />"https://meditationintervaltimer.co.uk" <br />
+            &gt;
+            <br />
+            &lt;/iframe &gt;
+          </x>
 
+          <button
+            class="copy-button"
+            onclick="navigator.clipboard.writeText(document.getElementById('links').innerText)"
+          >
+            copy
+          </button>
+        </code>
       </p>
-  
-<div class="center">
-    <img src="images/lotus.jpeg" alt="lotus" class="app-image center" />
-       
- <p>By Michael Phillips <a href="http:\\orca-tools.com">http:\\orca-tools.com</a></p>
-</div>
-     
+
+      <div class="center">
+        <img src="images/lotus.jpeg" alt="lotus" class="app-image center" />
+
+        <p>
+          By Michael Phillips
+          <a href="http:\\orca-tools.com">http:\\orca-tools.com</a>
+        </p>
+      </div>
     </main>
   </body>
 </html>
