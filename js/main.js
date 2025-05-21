@@ -18,7 +18,7 @@ let _timer;
 let wakeLock = null;
 let paused = false
 
-const soundsMap = new Map() 
+const soundsMap = new Map() ;
 soundsMap.set("Bell", new Audio("../sounds/Bell.mp3"));
 soundsMap.set("Bowl", new Audio("../sounds/Bowl.mp3"));
 
@@ -81,6 +81,12 @@ const getStages = () => [...document.querySelectorAll(".time-range")].map((e) =>
 }
 );
 
+  //preload sounds for iphone hack
+const preloadSounds = () => {
+  for (const value of soundsMap.values()) {
+    value.play();
+    value.pause();
+  }}
 
 // Run meditation sections
 const runMeditation = () => {
@@ -90,13 +96,9 @@ const runMeditation = () => {
   let sectionIndex = 0;
   let nextSectionEnd = parseInt(stages[sectionIndex].duration);
   
-  //preload sounds for iphone hack
-  for (const value of soundsMap.values()) {
-    value.play();
-    value.pause();
-     console.log(value);
-  }
- 
+
+ preloadSounds();
+
   this._timer = setInterval(() => {
 
     if (!paused) {
@@ -114,7 +116,6 @@ const runMeditation = () => {
         }
       }
       if (currentTotalSeconds >= (totalTime * 60)) {
-
         // finished
        soundsMap.get(stages[sectionIndex].sound).play();
         stop("Meditation Finished.");

@@ -2,7 +2,6 @@ class TimeSectionComponent extends HTMLElement {
     connectedCallback() {
         const template = document.getElementById("time-section-template");
         const clone = template.content.cloneNode(true);
-
         const timeElement = clone.querySelector(".section-time");
         const sectionLabelElement = clone.querySelector(".section-range-label");
         const rangeElement = clone.querySelector(".time-range");
@@ -10,7 +9,6 @@ class TimeSectionComponent extends HTMLElement {
         const soundSelectElement = clone.querySelector(".sound-select");
         const soundSelectLabelElement = clone.querySelector(".sound-select-label");
         const sectionCount = document.querySelectorAll(".section").length
-
         const inputName = `section-range-${sectionCount}`;
 
         rangeElement.id = inputName;
@@ -20,13 +18,19 @@ class TimeSectionComponent extends HTMLElement {
 
         soundSelectElement.id = soundSelectName;
         soundSelectLabelElement.htmlFor = soundSelectName;
-soundSelectElement.value = chimeSound;
-
+        soundSelectElement.value = chimeSound;
+       
+        soundsMap.forEach((sound, key) => {
+            const option = document.createElement("option");
+            option.value = key;
+            option.text = key;
+            soundSelectElement.appendChild(option);
+        }
+        );
 
         rangeElement.value = lastSetValue;
         timeElement.innerText = lastSetValue;
         sectionLabelElement.htmlFor = inputName;
-
 
         rangeElement.addEventListener(
             "input",
@@ -35,14 +39,15 @@ soundSelectElement.value = chimeSound;
                 lastSetValue = event.target.value;
             }
         );
+
         removeButton.addEventListener("click", (event) => {
             event.target.parentElement.closest("li").remove();
         });
 
-
-    soundSelectElement.addEventListener("change", (event) => {
-         const x = new Audio("../sounds/" + event.target.value +".mp3" );
-         x.play();
+        soundSelectElement.addEventListener("change", (event) => {
+            const s = soundsMap.get(event.target.value);
+            const ap = new Audio(s.src);
+            ap.play();
         });
 
         this.innerHTML = "";
