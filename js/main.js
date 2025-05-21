@@ -42,7 +42,6 @@ const releaseWakeLock = () => {
 
 // Starts the meditation
 const start = () => {
- 
   stopButtonElement.classList.remove("hide");
   pauseButtonElement.classList.remove("hide");
   setWakeLock();
@@ -59,9 +58,11 @@ const stop = (message) => {
 // load the chime sound
 const loadChime = (sound) => {
   _chime = new Audio(`../sounds/${sound}`);
+  // hack for safari - where sounds are not played without user interaction this seems to work.
    _chime.play();
   _chime.pause();
 }
+
 // Display the timer message
 const displayTimerValues = (value) => (timerElement.innerHTML = value);
 
@@ -109,7 +110,7 @@ const runMeditation = () => {
         if (sectionIndex < (stages.length - 1)) {
           sectionIndex++;
           nextSectionEnd += parseInt(stages[sectionIndex].duration);
-          loadChime(stages[sectionIndex].sound);
+         // loadChime(stages[sectionIndex].sound);
         }
       }
       if (currentTotalSeconds >= (totalTime * 60)) {
