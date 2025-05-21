@@ -39,6 +39,11 @@ soundSelectElement.value = chimeSound;
             event.target.parentElement.closest("li").remove();
         });
 
+
+    soundSelectElement.addEventListener("change", (event) => {
+            chime(event.target.value);
+        });
+
         this.innerHTML = "";
         this.appendChild(clone);
     }
