@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-QYMMTEL2W6"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-QYMMTEL2W6");
-    </script>
-
+       
     <meta charset="UTF-8" />
     <title>Meditation Timer (about)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,17 +22,14 @@
       sizes="16x16"
       href="images/favicon-16x16.png"
     />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="https://orca1.orca-tools.com/orca.min.css" />
+     <link rel="manifest" href="manifest.json" />
+
+    <link rel="stylesheet" href="css/orca.min.css" />
     <link rel="stylesheet" href="css/about.css" />
     <link rel="stylesheet" href="css/header.css" />
-
+  <script src="/js/common.js" defer></script>
     <meta name="description" content="A Meditation Timer." />
-    <meta name="google-adsense-account" content="ca-pub-5667920797558447" />
+
   </head>
 
   <body>
@@ -75,8 +58,8 @@
     </header>
     <nav class="center">
       <a href="/" class="nav-item">Home</a>
-      <a href="timer.html" class="nav-item">Timer</a>
-      <a href="about.html" class="nav-item">About</a>
+      <a href="/timer" class="nav-item">Timer</a>
+      <a href="/about" class="nav-item">About</a>
     </nav>
     <main class="info">
       <h2>About</h2>

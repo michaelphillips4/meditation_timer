@@ -6,7 +6,6 @@ const loadQuote = async () => {
   const response = await fetch("quotes.json");
   const data = await response.json();
   quotes = data.quotes;
-  console.log(quotes);
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   const quoteElement = document.getElementById("quote");
   quoteElement.innerHTML = randomQuote.quote;
