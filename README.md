@@ -1,3 +1,6 @@
+this project has now been replaced by https://github.com/michaelphillips4/MeditationIntervalTimer
+
+
 # Meditation Timer
 
 This is a simple timer that allows a number of sections to a meditation.
