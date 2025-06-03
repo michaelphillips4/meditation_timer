@@ -6,7 +6,7 @@ this project has now been replaced by https://github.com/michaelphillips4/Medita
 This is a simple timer that allows a number of sections to a meditation.
 It plays a gong sound at the end of each section of meditation.
 
-see https://www.meditationintervaltimer.co.uk/
+see [https://www.meditationintervaltimer.co.uk/](https://main.d1f5qzhfc6mocy.amplifyapp.com/about.html)
 
 ## Saving meditations
 
@@ -21,6 +21,3 @@ There is a request in the code to stop the device going into sleep mode. This is
 Pull the code locally. I use npm serve to create a server
 https://www.npmjs.com/package/serve but you can use any local server you like.
 
-## Deployment 
-
-The git hub branch main will deploy the code to AWS Amplify at the url https://meditationtimer.orca-tools.com/ and https://www.meditationintervaltimer.co.uk/  
